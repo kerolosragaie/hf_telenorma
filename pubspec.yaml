@@ -35,7 +35,9 @@ dependencies:
   #Project main data:
   flutter_app_name: ^0.1.1
   flutter_launcher_icons: ^0.9.2
+  animated_splash_screen: ^1.1.0
   # For project UI:
+  flutter_svg: ^0.23.0+1
   auto_size_text: ^3.0.0
   flutter_hex_color: ^2.0.0
   cupertino_icons: ^1.0.2
@@ -63,8 +65,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
