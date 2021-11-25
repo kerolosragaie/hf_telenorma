@@ -1,6 +1,6 @@
-# hf
+# HANDELSFAKTOR
 
-HF telenorma mobile app
+HANDELSFAKTOR Telenorma mobile app
 
 ## Getting Started
 
