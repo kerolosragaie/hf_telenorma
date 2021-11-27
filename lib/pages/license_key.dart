@@ -63,7 +63,6 @@ class _Logo extends StatelessWidget {
 
 class _Slogan extends StatelessWidget {
   const _Slogan({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Container(
