@@ -1,8 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hex_color/flutter_hex_color.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:hf/widgets/widgets.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:hf/presentation_layer/widgets/textbutton_pro.dart';
+import 'package:hf/presentation_layer/widgets/textformfield_pro.dart';
+
 
 class LicenseKeyPage extends StatefulWidget {
   const LicenseKeyPage({Key? key}) : super(key: key);
@@ -38,6 +40,16 @@ class _LicenseKeyPageState extends State<LicenseKeyPage> {
               onPressed: () {},
             ),
           ),
+
+          SizedBox(height: 300,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+
+            children: [
+              Text("Powered by", style: TextStyle(fontSize: 14),),
+              Text("TELENORMA", style: TextStyle(fontSize: 14, color: HexColor("#F89921")),),
+            ],
+          )
         ],
       ),
     );
@@ -51,12 +63,13 @@ class _Logo extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(top: 53, left: 70, right: 70),
       //TODO: need to change logo color as in figma
-      child: SvgPicture.asset(
+      child: Image(image: AssetImage('assets/logo_HF.jpg'),),
+      /*SvgPicture.asset(
         "assets/hf_logo.svg",
         width: 235,
         height: 65.44,
         color: HexColor("FF9800"),
-      ),
+      ),*/
     );
   }
 }
@@ -70,11 +83,13 @@ class _Slogan extends StatelessWidget {
       child: AutoSizeText(
         "Bitte geben Sie Ihre Lizenzschlüssel ein",
         textAlign: TextAlign.center,
-        style: TextStyle(
-            color: HexColor("424D51"),
-            fontSize: 24,
-            fontStyle: FontStyle.normal,
-            fontWeight: FontWeight.w300),
+        style: GoogleFonts.raleway(
+          textStyle: TextStyle(
+              color: HexColor("424D51"),
+              fontSize: 24,
+              fontStyle: FontStyle.normal,
+              fontWeight: FontWeight.w300),
+        )
       ),
     );
   }

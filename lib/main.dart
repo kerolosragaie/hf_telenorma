@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hex_color/flutter_hex_color.dart';
-import 'package:hf/splash_screen.dart';
+import 'package:hf/presentation_layer/screens/splash_screen.dart';
 
 void main() {
   //SystemUiOverlayStyle is for Upper icons (wifi,etc...)
