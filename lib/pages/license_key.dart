@@ -21,7 +21,7 @@ class _LicenseKeyPageState extends State<LicenseKeyPage> {
         children: [
           const _Logo(),
           const _Slogan(),
-          //TODO: add the font style
+          //TODO: add the font
           Container(
             margin: const EdgeInsets.only(top: 40),
             child: TextFormFieldPro(
