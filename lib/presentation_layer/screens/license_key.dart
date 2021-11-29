@@ -5,14 +5,15 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hf/presentation_layer/widgets/textbutton_pro.dart';
 import 'package:hf/presentation_layer/widgets/textformfield_pro.dart';
 
-class LicenseKeyPage extends StatefulWidget {
-  const LicenseKeyPage({Key? key}) : super(key: key);
+
+class LicenseKeyScreen extends StatefulWidget {
+  const LicenseKeyScreen({Key? key}) : super(key: key);
 
   @override
-  _LicenseKeyPageState createState() => _LicenseKeyPageState();
+  _LicenseKeyScreenState createState() => _LicenseKeyScreenState();
 }
 
-class _LicenseKeyPageState extends State<LicenseKeyPage> {
+class _LicenseKeyScreenState extends State<LicenseKeyScreen> {
   TextEditingController licenseKeyController = TextEditingController();
 
   @override
@@ -40,20 +41,13 @@ class _LicenseKeyPageState extends State<LicenseKeyPage> {
             ),
           ),
 
-          const SizedBox(
-            height: 300,
-          ),
+          SizedBox(height: 300,),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
+
             children: [
-              const Text(
-                "Powered by",
-                style: TextStyle(fontSize: 14),
-              ),
-              Text(
-                "TELENORMA",
-                style: TextStyle(fontSize: 14, color: HexColor("#F89921")),
-              ),
+              Text("Powered by", style: TextStyle(fontSize: 14),),
+              Text("TELENORMA", style: TextStyle(fontSize: 14, color: HexColor("#F89921")),),
             ],
           )
         ],
@@ -69,9 +63,7 @@ class _Logo extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(top: 53, left: 70, right: 70),
       //TODO: need to change logo color as in figma
-      child: const Image(
-        image: AssetImage('assets/logo_HF.jpg'),
-      ),
+      child: Image(image: AssetImage('assets/logo_HF.jpg'),),
       /*SvgPicture.asset(
         "assets/hf_logo.svg",
         width: 235,
@@ -88,15 +80,17 @@ class _Slogan extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(top: 54.56, left: 61, right: 61),
-      child: AutoSizeText("Bitte geben Sie Ihre Lizenzschlüssel ein",
-          textAlign: TextAlign.center,
-          style: GoogleFonts.raleway(
-            textStyle: TextStyle(
-                color: HexColor("424D51"),
-                fontSize: 24,
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w300),
-          )),
+      child: AutoSizeText(
+        "Bitte geben Sie Ihre Lizenzschlüssel ein",
+        textAlign: TextAlign.center,
+        style: GoogleFonts.raleway(
+          textStyle: TextStyle(
+              color: HexColor("424D51"),
+              fontSize: 24,
+              fontStyle: FontStyle.normal,
+              fontWeight: FontWeight.w300),
+        )
+      ),
     );
   }
 }
