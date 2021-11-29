@@ -10,7 +10,9 @@ void main() {
         statusBarIconBrightness: Brightness.dark,
         statusBarColor: Colors.transparent),
   );
-  runApp(HF(appRouter: AppRouter(),));
+  runApp(HF(
+    appRouter: AppRouter(),
+  ));
 }
 
 class HF extends StatelessWidget {
@@ -26,7 +28,7 @@ class HF extends StatelessWidget {
       theme: ThemeData(
           //primarySwatch: Colors.blue,
           primaryColor: HexColor("FF9800")),
-      initialRoute: '/',
+      initialRoute: '/LicenseKeyScreen',
       onGenerateRoute: appRouter.generateRoute,
     );
   }

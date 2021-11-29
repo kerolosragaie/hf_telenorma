@@ -21,7 +21,6 @@ class _LicenseKeyPageState extends State<LicenseKeyPage> {
         children: [
           const _Logo(),
           const _Slogan(),
-          //TODO: add the font
           Container(
             margin: const EdgeInsets.only(top: 40),
             child: TextFormFieldPro(
@@ -29,6 +28,7 @@ class _LicenseKeyPageState extends State<LicenseKeyPage> {
               hintText: "TN-THE-BEST",
               textEditingController: licenseKeyController,
               textInputType: TextInputType.number,
+              validator: (val) {},
             ),
           ),
           Container(
@@ -50,7 +50,6 @@ class _Logo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(top: 53, left: 70, right: 70),
-      //TODO: need to change logo color as in figma
       child: SvgPicture.asset(
         "assets/hf_logo.svg",
         width: 235,

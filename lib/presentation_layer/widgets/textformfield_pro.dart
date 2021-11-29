@@ -8,12 +8,14 @@ class TextFormFieldPro extends StatelessWidget {
   final String hintText;
   final TextEditingController textEditingController;
   final TextInputType textInputType;
+  final Function validator;
   const TextFormFieldPro(
       {Key? key,
       required this.textEditingController,
       required this.title,
       required this.hintText,
-      this.textInputType = TextInputType.text})
+      this.textInputType = TextInputType.text,
+      required this.validator})
       : super(key: key);
 
   @override
@@ -43,6 +45,7 @@ class TextFormFieldPro extends StatelessWidget {
             keyboardType: textInputType,
             cursorColor: HexColor("424D51"),
             controller: textEditingController,
+            validator: (val) => validator(val),
             autovalidateMode: AutovalidateMode.always,
             style: const TextStyle(
               color: Colors.black,
@@ -52,17 +55,22 @@ class TextFormFieldPro extends StatelessWidget {
               labelText: hintText,
               labelStyle: GoogleFonts.raleway(
                 textStyle: TextStyle(
-                color:  HexColor("424D51"),
-                fontSize: 14,
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w300),
+                    color: HexColor("424D51"),
+                    fontSize: 14,
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w300),
+              ),
+              errorStyle: GoogleFonts.raleway(
+                textStyle: const TextStyle(
+                  color: Colors.red,
+                  fontSize: 10,
                 ),
+              ),
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(
                   color: HexColor("F2F3F2"),
                 ),
               ),
-
               focusedBorder: UnderlineInputBorder(
                 borderSide: BorderSide(color: HexColor("424D51")),
               ),

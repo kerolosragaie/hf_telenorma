@@ -3,8 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hex_color/flutter_hex_color.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hf/presentation_layer/widgets/textbutton_pro.dart';
-import 'package:hf/presentation_layer/widgets/textformfield_pro.dart';
+import 'package:hf/presentation_layer/widgets/widgets.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -25,7 +24,6 @@ class _LoginScreenState extends State<LoginScreen> {
           children: [
             const _Logo(),
             const _Slogan(),
-            //TODO: add the font style
             Container(
               margin: const EdgeInsets.only(top: 40),
               child: TextFormFieldPro(
@@ -33,6 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 hintText: "Username",
                 textEditingController: userNameController,
                 textInputType: TextInputType.text,
+                validator: (val) {},
               ),
             ),
             Container(
@@ -42,25 +41,19 @@ class _LoginScreenState extends State<LoginScreen> {
                 hintText: "Passwort",
                 textEditingController: passwordController,
                 textInputType: TextInputType.visiblePassword,
+                validator: (val) {},
               ),
             ),
-            Row(
-              children: [
-                Expanded(
-                  child: CheckboxListTile(
-                    controlAffinity: ListTileControlAffinity.leading,
-                    title: Text('Eingeloggt bleiben',
-                        style: GoogleFonts.raleway(
-                          textStyle: TextStyle(
-                              fontSize: 12,
-                              color: HexColor("#000000"),
-                              fontWeight: FontWeight.w100),
-                        )),
-                    value: false,
-                    onChanged: (bool? value) {},
-                  ),
-                ),
-              ],
+            Container(
+              margin: const EdgeInsets.only(
+                left: 26,
+                right: 86,
+              ),
+              child: CheckBoxTilePro(
+                title: "Eingeloggt bleiben",
+                onChanged: (val) {},
+                value: false,
+              ),
             ),
             Container(
               padding: const EdgeInsets.only(top: 20, left: 23, right: 23),
@@ -69,23 +62,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 onPressed: () {},
               ),
             ),
-
             const SizedBox(
               height: 130,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  "Powered by",
-                  style: TextStyle(fontSize: 14),
-                ),
-                Text(
-                  "TELENORMA",
-                  style: TextStyle(fontSize: 14, color: HexColor("#F89921")),
-                ),
-              ],
-            )
+            const TelenormaCopyrights(),
           ],
         ),
       ),
@@ -100,7 +80,6 @@ class _Logo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(top: 53, left: 70, right: 70),
-      //TODO: need to change logo color as in figma
       child: const Image(
         image: AssetImage('assets/logo_HF.jpg'),
       ),

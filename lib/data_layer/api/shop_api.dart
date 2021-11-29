@@ -1,28 +1,21 @@
 import 'package:dio/dio.dart';
-import 'package:hf/constants/strings.dart';
-class ShopApi{
-  late Dio dio;
+import 'package:hf/data_layer/api/service_manager.dart';
 
-  shopApi(){
-    BaseOptions options = BaseOptions(
-      baseUrl: baseUrl,
-      receiveDataWhenStatusError: true,
-      connectTimeout: 20 * 1000,
-      receiveTimeout: 20 * 1000,
-    );
-    dio = Dio(options);
+class ShopApi {
+  late ServiceManager serviceManager;
 
+  shopApi() {
+    serviceManager = ServiceManager();
   }
 
-  Future <List<dynamic>> getAllShops() async{
-    try{
-      Response response = await dio.get('shops');
+  Future<List<dynamic>> getAllShops() async {
+    try {
+      Response response = await serviceManager.dio.get('shops');
       //print(response.data.toString());
       return response.data;
-    }catch(e){
+    } catch (e) {
       //print(e.toString());
       return [];
     }
-
   }
 }
