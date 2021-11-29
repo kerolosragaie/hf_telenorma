@@ -6,9 +6,10 @@ class ShopsRepository{
   final ShopApi shopApi;
 
   ShopsRepository(this.shopApi);
+
   Future <List<Shops>> getAllShops() async{
-    final shops = await shopApi.getAllShops();
-    return shops.map((shop) => shops.fromJson(shop)).toList();
+    final shopsList = await shopApi.getAllShops();
+    return shopsList.map((shop) => Shops.fromJson(shop)).toList();
 
   }
 }
