@@ -6,14 +6,14 @@ import 'package:hf/presentation_layer/widgets/textbutton_pro.dart';
 import 'package:hf/presentation_layer/widgets/textformfield_pro.dart';
 
 
-class LicenseKeyPage extends StatefulWidget {
-  const LicenseKeyPage({Key? key}) : super(key: key);
+class LicenseKeyScreen extends StatefulWidget {
+  const LicenseKeyScreen({Key? key}) : super(key: key);
 
   @override
-  _LicenseKeyPageState createState() => _LicenseKeyPageState();
+  _LicenseKeyScreenState createState() => _LicenseKeyScreenState();
 }
 
-class _LicenseKeyPageState extends State<LicenseKeyPage> {
+class _LicenseKeyScreenState extends State<LicenseKeyScreen> {
   TextEditingController licenseKeyController = TextEditingController();
 
   @override
