@@ -2,7 +2,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hex_color/flutter_hex_color.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hf/presentation_layer/widgets/textbutton_pro.dart';
 import 'package:hf/presentation_layer/widgets/textformfield_pro.dart';
@@ -53,14 +52,14 @@ class _LoginScreenState extends State<LoginScreen> {
                     title: Text('Eingeloggt bleiben',
                         style: GoogleFonts.raleway(
                           textStyle: TextStyle(
-                              fontSize: 12, color: HexColor("#000000"), fontWeight: FontWeight.w100),
-                        )
-                    ),
+                              fontSize: 12,
+                              color: HexColor("#000000"),
+                              fontWeight: FontWeight.w100),
+                        )),
                     value: false,
                     onChanged: (bool? value) {},
                   ),
                 ),
-
               ],
             ),
             Container(
@@ -71,13 +70,20 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
 
-            SizedBox(height: 130,),
+            const SizedBox(
+              height: 130,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-
               children: [
-                Text("Powered by", style: TextStyle(fontSize: 14),),
-                Text("TELENORMA", style: TextStyle(fontSize: 14, color: HexColor("#F89921")),),
+                const Text(
+                  "Powered by",
+                  style: TextStyle(fontSize: 14),
+                ),
+                Text(
+                  "TELENORMA",
+                  style: TextStyle(fontSize: 14, color: HexColor("#F89921")),
+                ),
               ],
             )
           ],
@@ -95,7 +101,9 @@ class _Logo extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(top: 53, left: 70, right: 70),
       //TODO: need to change logo color as in figma
-      child: Image(image: AssetImage('assets/logo_HF.jpg'),),
+      child: const Image(
+        image: AssetImage('assets/logo_HF.jpg'),
+      ),
 
       /*SvgPicture.asset(
         "assets/logo_HF_gr_l",
