@@ -2,8 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hex_color/flutter_hex_color.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hf/presentation_layer/widgets/textbutton_pro.dart';
-import 'package:hf/presentation_layer/widgets/textformfield_pro.dart';
+import 'package:hf/presentation_layer/widgets/widgets.dart';
 
 
 class LicenseKeyScreen extends StatefulWidget {
@@ -37,16 +36,18 @@ class _LicenseKeyScreenState extends State<LicenseKeyScreen> {
             padding: const EdgeInsets.only(top: 20, left: 23, right: 23),
             child: TextButtonPro(
               title: "senden",
-              onPressed: () {},
+              onPressed: () {
+
+              },
             ),
           ),
 
-          SizedBox(height: 300,),
+          const SizedBox(height: 300,),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
 
             children: [
-              Text("Powered by", style: TextStyle(fontSize: 14),),
+              const Text("Powered by", style: TextStyle(fontSize: 14),),
               Text("TELENORMA", style: TextStyle(fontSize: 14, color: HexColor("#F89921")),),
             ],
           )
@@ -63,7 +64,7 @@ class _Logo extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(top: 53, left: 70, right: 70),
       //TODO: need to change logo color as in figma
-      child: Image(image: AssetImage('assets/logo_HF.jpg'),),
+      child: const Image(image: AssetImage('assets/logo_HF.jpg'),),
       /*SvgPicture.asset(
         "assets/hf_logo.svg",
         width: 235,

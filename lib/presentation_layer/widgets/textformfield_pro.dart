@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hex_color/flutter_hex_color.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class TextFormFieldPro extends StatelessWidget {
   final String title;
@@ -49,12 +50,19 @@ class TextFormFieldPro extends StatelessWidget {
             ),
             decoration: InputDecoration(
               labelText: hintText,
-              labelStyle: TextStyle(fontSize: 14, color: HexColor("424D51")),
+              labelStyle: GoogleFonts.raleway(
+                textStyle: TextStyle(
+                color:  HexColor("424D51"),
+                fontSize: 14,
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w300),
+                ),
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(
                   color: HexColor("F2F3F2"),
                 ),
               ),
+
               focusedBorder: UnderlineInputBorder(
                 borderSide: BorderSide(color: HexColor("424D51")),
               ),

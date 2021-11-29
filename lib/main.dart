@@ -2,22 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hex_color/flutter_hex_color.dart';
 import 'package:hf/app_router.dart';
-import 'package:hf/presentation_layer/screens/splash_screen.dart';
 
 void main() {
-
-  runApp(HF(appRouter: AppRouter(),));
   //SystemUiOverlayStyle is for Upper icons (wifi,etc...)
-
-  /*
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
         statusBarIconBrightness: Brightness.dark,
         statusBarColor: Colors.transparent),
   );
-  */
-
-
+  runApp(HF(appRouter: AppRouter(),));
 }
 
 class HF extends StatelessWidget {

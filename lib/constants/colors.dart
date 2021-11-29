@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hex_color/flutter_hex_color.dart';
 
-class MyColors {
-  static Color myOrange = HexColor("#F7941D");
+class AppColors {
+  static Color orange = HexColor("#F7941D");
 }
