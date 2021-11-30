@@ -1,6 +1,6 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:hf/presentation_layer/screens/login_screen.dart';
+import 'package:hf/presentation_layer/screens/pages.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -16,6 +16,8 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: Colors.white,
       duration: 2800,
       splash: const Image(
+        width: 250,
+        height: 250,
         image: AssetImage('assets/logo_HF.jpg'),
       ),
       /*SvgPicture.asset(
@@ -24,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
         height: 80,
         color: HexColor("FF9800"),
       ),*/
-      nextScreen: const LoginScreen(),
+      nextScreen: const LicenseKeyScreen(),
     );
   }
 }

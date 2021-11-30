@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hex_color/flutter_hex_color.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hf/constants/strings.dart';
 import 'package:hf/data_layer/local_data/license_data.dart';
 import 'package:hf/presentation_layer/widgets/widgets.dart';
 
@@ -18,13 +19,15 @@ class _LicenseKeyScreenState extends State<LicenseKeyScreen> {
   @override
   void initState() {
     super.initState();
-    checkIfLicenseFound();
+    Future.delayed(const Duration(seconds: 0), () {
+      checkIfLicenseFound();
+    });
   }
 
   void checkIfLicenseFound() async {
     if (await LicenseData.isLicenseFound()) {
       Navigator.pop(context);
-      Navigator.of(context).pushNamed('/loginScreen');
+      Navigator.of(context).pushNamed(loginScreen);
     }
   }
 
@@ -58,14 +61,14 @@ class _LicenseKeyScreenState extends State<LicenseKeyScreen> {
                       .then((value) async {
                     if (await LicenseData.isLicenseFound()) {
                       Navigator.pop(context);
-                      Navigator.of(context).pushNamed('/loginScreen');
+                      Navigator.of(context).pushNamed(loginScreen);
                     }
                   });
                 },
               ),
             ),
             const SizedBox(
-              height: 265,
+              height: 260,
             ),
             const TelenormaCopyrights(),
           ],
