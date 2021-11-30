@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hex_color/flutter_hex_color.dart';
 import 'package:hf/app_router.dart';
+import 'package:hf/constants/strings.dart';
 
 void main() {
   //SystemUiOverlayStyle is for Upper icons (wifi,etc...)
@@ -28,7 +29,7 @@ class HF extends StatelessWidget {
       theme: ThemeData(
           //primarySwatch: Colors.blue,
           primaryColor: HexColor("FF9800")),
-      initialRoute: '/LicenseKeyScreen',
+      initialRoute: splashScreen,
       onGenerateRoute: appRouter.generateRoute,
     );
   }

@@ -1,5 +1,6 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:hf/presentation_layer/screens/license_key.dart';
 import 'package:hf/presentation_layer/screens/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -24,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
         height: 80,
         color: HexColor("FF9800"),
       ),*/
-      nextScreen: const LoginScreen(),
+      nextScreen: const LicenseKeyScreen(),
     );
   }
 }
