@@ -52,6 +52,7 @@ class TextFormFieldPro extends StatelessWidget {
               fontSize: 12,
             ),
             decoration: InputDecoration(
+              floatingLabelBehavior: FloatingLabelBehavior.never,
               labelText: hintText,
               labelStyle: GoogleFonts.raleway(
                 textStyle: TextStyle(
