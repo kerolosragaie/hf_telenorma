@@ -9,14 +9,14 @@ class TextFormFieldPro extends StatelessWidget {
   final TextEditingController textEditingController;
   final TextInputType textInputType;
   final Function validator;
-  const TextFormFieldPro(
-      {Key? key,
-      required this.textEditingController,
-      required this.title,
-      required this.hintText,
-      this.textInputType = TextInputType.text,
-      required this.validator})
-      : super(key: key);
+  const TextFormFieldPro({
+    Key? key,
+    required this.textEditingController,
+    required this.title,
+    required this.hintText,
+    this.textInputType = TextInputType.text,
+    required this.validator,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

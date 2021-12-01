@@ -10,3 +10,4 @@ const password = "dev123";
 const splashScreen = '/';
 const licenseKeyScreen = '/LicenseKeyScreen';
 const loginScreen = '/loginScreen';
+const startScreen = '/startScreen';

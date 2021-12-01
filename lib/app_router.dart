@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hf/presentation_layer/screens/license_key.dart';
-import 'package:hf/presentation_layer/screens/login_screen.dart';
-import 'package:hf/presentation_layer/screens/splash_screen.dart';
-
+import 'package:hf/presentation_layer/screens/start_screen.dart';
 import 'constants/strings.dart';
+import 'presentation_layer/screens/pages.dart';
 
 class AppRouter {
   Route? generateRoute(RouteSettings settings) {
@@ -14,6 +12,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const LicenseKeyScreen());
       case loginScreen:
         return MaterialPageRoute(builder: (_) => const LoginScreen());
+      case startScreen:
+        return MaterialPageRoute(builder: (_) => const StartScreen());
     }
   }
 }
