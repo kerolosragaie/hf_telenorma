@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hf/presentation_layer/screens/scanner_screen.dart';
 import 'package:hf/presentation_layer/screens/start_screen.dart';
 import 'constants/strings.dart';
 import 'presentation_layer/screens/pages.dart';
@@ -14,6 +15,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const LoginScreen());
       case startScreen:
         return MaterialPageRoute(builder: (_) => const StartScreen());
+      case scannerScreen:
+        return MaterialPageRoute(builder: (_) => const ScannerScreen());
     }
   }
 }

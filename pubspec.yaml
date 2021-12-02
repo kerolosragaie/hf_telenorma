@@ -41,6 +41,7 @@ dependencies:
   auto_size_text: ^3.0.0
   flutter_hex_color: ^2.0.0
   cupertino_icons: ^1.0.2
+  fast_barcode_scanner: ^1.1.4
   #For data:
   shared_preferences: ^2.0.9
   
@@ -84,6 +85,7 @@ flutter:
   assets:
     - assets/
     - assets/icons/
+    - assets/buttons/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
