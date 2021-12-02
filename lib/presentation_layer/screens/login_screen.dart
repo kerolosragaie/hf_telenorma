@@ -42,7 +42,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 hintText: "Passwort",
                 textEditingController: passwordController,
                 textInputType: TextInputType.visiblePassword,
-                validator: (val) {},
+                validator: (val) {
+                  if (val.toString().isEmpty){
+                    return "Dies ist ein Pflichtfeld";
+                  }
+                },
               ),
             ),
             Container(

@@ -4,6 +4,7 @@ import 'package:flutter_hex_color/flutter_hex_color.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hf/constants/strings.dart';
 import 'package:hf/data_layer/local_data/license_data.dart';
+import 'package:hf/presentation_layer/widgets/error_message.dart';
 import 'package:hf/presentation_layer/widgets/widgets.dart';
 
 class LicenseKeyScreen extends StatefulWidget {
@@ -20,16 +21,17 @@ class _LicenseKeyScreenState extends State<LicenseKeyScreen> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 0), () async {
-      checkIfLicenseFound();
+      //checkIfLicenseFound();
     });
   }
-
+/*
   void checkIfLicenseFound() async {
     if (await LicenseData.isLicenseFound()) {
       Navigator.pop(context);
       Navigator.of(context).pushNamed(loginScreen);
     }
   }
+  */
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +49,7 @@ class _LicenseKeyScreenState extends State<LicenseKeyScreen> {
                 textEditingController: licenseKeyController,
                 validator: (val) {
                   if (val.toString().isEmpty) {
-                    return "Empty!";
+                    return "Das ist ein Pflichtfeld!";
                   }
                 },
               ),
@@ -62,6 +64,10 @@ class _LicenseKeyScreenState extends State<LicenseKeyScreen> {
                     if (await LicenseData.isLicenseFound()) {
                       Navigator.pop(context);
                       Navigator.of(context).pushNamed(loginScreen);
+                    }
+                    else{
+                      showAlertDialog(context);
+
                     }
                   });
                 },
@@ -87,12 +93,7 @@ class _Logo extends StatelessWidget {
       child: const Image(
         image: AssetImage('assets/logo_HF.jpg'),
       ),
-      /*SvgPicture.asset(
-        "assets/hf_logo.svg",
-        width: 235,
-        height: 65.44,
-        color: HexColor("FF9800"),
-      ),*/
+
     );
   }
 }
