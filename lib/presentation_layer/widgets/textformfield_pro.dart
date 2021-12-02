@@ -46,12 +46,13 @@ class TextFormFieldPro extends StatelessWidget {
             cursorColor: HexColor("424D51"),
             controller: textEditingController,
             validator: (val) => validator(val),
-            autovalidateMode: AutovalidateMode.always,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             style: const TextStyle(
               color: Colors.black,
               fontSize: 12,
             ),
             decoration: InputDecoration(
+              floatingLabelBehavior: FloatingLabelBehavior.never,
               labelText: hintText,
               labelStyle: GoogleFonts.raleway(
                 textStyle: TextStyle(

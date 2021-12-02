@@ -21,8 +21,8 @@ class _LicenseKeyScreenState extends State<LicenseKeyScreen> {
     super.initState();
     //checkIfLicenseFound();
   }
-
- /* void checkIfLicenseFound() async {
+/*
+  void checkIfLicenseFound() async {
     if (await LicenseData.isLicenseFound()) {
       Navigator.pop(context);
       Navigator.of(context).pushNamed('/loginScreen');
@@ -44,8 +44,11 @@ class _LicenseKeyScreenState extends State<LicenseKeyScreen> {
                 title: "Lizenzschlüssel",
                 hintText: "TN-THE-BEST",
                 textEditingController: licenseKeyController,
-                validator: (val)=> (val.isEmpty)? "Dies ist ein Pflichtfeld" : null,
-
+                validator: (val) {
+                  if (val.toString().isEmpty) {
+                    return "Das ist ein Pflichtfeld";
+                  }
+                },
               ),
             ),
             Container(
