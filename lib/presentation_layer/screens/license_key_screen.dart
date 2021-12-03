@@ -44,7 +44,7 @@ class _LicenseKeyScreenState extends State<LicenseKeyScreen> {
             Container(
               margin: const EdgeInsets.only(top: 40),
               child: TextFormFieldPro(
-                title: "Der Code",
+                title: "Schlüssel",
                 hintText: "TN-THE-BEST",
                 textEditingController: licenseKeyController,
                 validator: (val) {
