@@ -1,6 +1,10 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hex_color/flutter_hex_color.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hf/constants/strings.dart';
 import 'package:hf/data_layer/local_data/license_data.dart';
+import 'package:hf/presentation_layer/widgets/error_message.dart';
 import 'package:hf/presentation_layer/widgets/widgets.dart';
 
 class LicenseKeyScreen extends StatefulWidget {
@@ -17,16 +21,17 @@ class _LicenseKeyScreenState extends State<LicenseKeyScreen> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 0), () async {
-      checkIfLicenseFound();
+      //checkIfLicenseFound();
     });
   }
-
+/*
   void checkIfLicenseFound() async {
     if (await LicenseData.isLicenseFound()) {
       Navigator.pop(context);
       Navigator.of(context).pushNamed(loginScreen);
     }
   }
+  */
 
   @override
   Widget build(BuildContext context) {
@@ -34,20 +39,17 @@ class _LicenseKeyScreenState extends State<LicenseKeyScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const HfLogo(),
-            const Slogan(
-              text: "Bitte geben Sie Ihre Lizenzschlüssel ein",
-              fontSize: 24,
-            ),
+            const _Logo(),
+            const _Slogan(),
             Container(
               margin: const EdgeInsets.only(top: 40),
               child: TextFormFieldPro(
-                title: "Der Code",
+                title: "Schlüssel",
                 hintText: "TN-THE-BEST",
                 textEditingController: licenseKeyController,
                 validator: (val) {
                   if (val.toString().isEmpty) {
-                    return "Empty!";
+                    return "Das ist ein Pflichtfeld!";
                   }
                 },
               ),
@@ -63,6 +65,10 @@ class _LicenseKeyScreenState extends State<LicenseKeyScreen> {
                       Navigator.pop(context);
                       Navigator.of(context).pushNamed(loginScreen);
                     }
+                    else{
+                      showAlertDialog(context);
+
+                    }
                   });
                 },
               ),
@@ -74,6 +80,39 @@ class _LicenseKeyScreenState extends State<LicenseKeyScreen> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _Logo extends StatelessWidget {
+  const _Logo({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(top: 53, left: 70, right: 70),
+      child: const Image(
+        image: AssetImage('assets/logo_HF.jpg'),
+      ),
+
+    );
+  }
+}
+
+class _Slogan extends StatelessWidget {
+  const _Slogan({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(top: 54.56, left: 61, right: 61),
+      child: AutoSizeText("Bitte geben Sie Ihre Lizenzschlüssel ein",
+          textAlign: TextAlign.center,
+          style: GoogleFonts.raleway(
+            textStyle: TextStyle(
+                color: HexColor("424D51"),
+                fontSize: 24,
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w300),
+          )),
     );
   }
 }

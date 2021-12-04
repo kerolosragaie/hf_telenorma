@@ -24,11 +24,15 @@ class _LoginScreenState extends State<LoginScreen> {
             Container(
               margin: const EdgeInsets.only(top: 40),
               child: TextFormFieldPro(
-                title: "Username",
-                hintText: "Username",
+                title: "Benutzername",
+                hintText: "Benutzername",
                 textEditingController: userNameController,
                 textInputType: TextInputType.text,
-                validator: (val) {},
+                validator: (val) {
+                  if (val.toString().isEmpty){
+                    return "Dies ist ein Pflichtfeld";
+                  }
+                },
               ),
             ),
             Container(
@@ -38,7 +42,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 hintText: "Passwort",
                 textEditingController: passwordController,
                 textInputType: TextInputType.visiblePassword,
-                validator: (val) {},
+                validator: (val) {
+                  if (val.toString().isEmpty){
+                    return "Dies ist ein Pflichtfeld";
+                  }
+                },
               ),
             ),
             Container(

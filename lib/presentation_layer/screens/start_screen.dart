@@ -39,7 +39,7 @@ class _StartScreenState extends State<StartScreen> {
           children: [
             const HfLogo(),
             const Slogan(
-              text: "Hallo yasta",
+              text: "Hallo Alex",
               fontSize: 23,
               margin: EdgeInsets.only(top: 40.56, left: 51, right: 52),
             ),
