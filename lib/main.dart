@@ -2,18 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hex_color/flutter_hex_color.dart';
 import 'package:hf/app_router.dart';
+import 'package:hf/business_logic_layer/bloc_observer.dart';
 import 'package:hf/constants/strings.dart';
+import 'package:bloc/bloc.dart';
+import 'package:hf/custom_bloc_provider.dart';
+
 
 void main() {
   //SystemUiOverlayStyle is for Upper icons (wifi,etc...)
+  // بيتأكد ان كل حاجة هنا في الميثود خلصت وبعدين يفتح ال App
+  WidgetsFlutterBinding.ensureInitialized();
+  MyBlocObserver();
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
         statusBarIconBrightness: Brightness.dark,
         statusBarColor: Colors.transparent),
   );
-  runApp(HF(
-    appRouter: AppRouter(),
-  ));
+  runApp(const Core());
 }
 
 class HF extends StatelessWidget {

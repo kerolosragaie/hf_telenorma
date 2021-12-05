@@ -14,7 +14,7 @@ class InventoryCubit extends Cubit<InventoryState> {
 
 List<Shops> getAllShops(){
   shopsRepository.getAllShops().then((shops) {
-    emit(ShopsLoaded(shops));
+    emit(ShopsLoadedState(shops));
     this.shops = shops;
   });
 

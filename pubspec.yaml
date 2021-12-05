@@ -62,7 +62,7 @@ dev_dependencies:
   dio: ^4.0.4
   # Bloc pattern is a way to organize your code which helps you to get good performance
   flutter_bloc:
-  bloc: ^8.0.1
+  bloc:
   flutter_offline: ^2.0.0
 
 
