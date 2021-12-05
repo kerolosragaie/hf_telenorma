@@ -9,7 +9,7 @@ class LicenseKey extends StatelessWidget {
   Widget build(BuildContext context) {
 
     //This is the form that links the bloc with UI
-    // InventoryCubit.get(context);
+    // InventoryCubit cubit = BlocProvider.of<InventoryCubit>(context,listen);
     return  BlocConsumer<InventoryCubit,InventoryState>(
       listener: (context, state){
       },
