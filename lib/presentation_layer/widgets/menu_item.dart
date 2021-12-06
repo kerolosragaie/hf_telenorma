@@ -8,12 +8,14 @@ class MenuItem extends StatelessWidget {
   final String text;
   final EdgeInsetsGeometry? margin;
   final Function onTap;
+  final bool addBackground;
   const MenuItem(
       {Key? key,
       required this.imageLocation,
       required this.text,
       this.margin,
-      required this.onTap})
+      required this.onTap,
+      this.addBackground = false})
       : super(key: key);
 
   @override
@@ -22,21 +24,27 @@ class MenuItem extends StatelessWidget {
       onTap: () => onTap(),
       child: Column(
         children: [
-          Stack(
-            alignment: Alignment.center,
-            children: [
-              const Image(
-                image: AssetImage("assets/icons/background_icon.png"),
-              ),
-              Image(
-                image: AssetImage(imageLocation),
-              ),
-            ],
+          SizedBox(
+            height: 88,
+            width: 80,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                addBackground
+                    ? const Image(
+                        image: AssetImage("assets/icons/background_icon.png"),
+                      )
+                    : const SizedBox.shrink(),
+                Image(
+                  image: AssetImage(imageLocation),
+                ),
+              ],
+            ),
           ),
           Container(
             margin: const EdgeInsets.only(top: 19.05),
-            height: 23,
-            width: 106,
+            height: 30,
+            width: 120,
             child: AutoSizeText(
               text.toUpperCase(),
               maxLines: 2,

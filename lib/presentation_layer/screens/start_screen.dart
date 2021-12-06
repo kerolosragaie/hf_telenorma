@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hex_color/flutter_hex_color.dart';
+import 'package:hf/constants/strings.dart';
 import 'package:hf/presentation_layer/widgets/widgets.dart';
 
 class StartScreen extends StatefulWidget {
@@ -9,31 +11,67 @@ class StartScreen extends StatefulWidget {
 }
 
 class _StartScreenState extends State<StartScreen> {
-  List<MenuItem> menuItems = [
-    MenuItem(
-      imageLocation: "assets/icons/scanner.png",
-      text: "Teil-Inventur",
-      onTap: () {},
-    ),
-    MenuItem(
-      imageLocation: "assets/icons/inventory_icon.png",
-      text: "Inventur",
-      onTap: () {},
-    ),
-    MenuItem(
-      imageLocation: "assets/icons/wareneingang_icon.png",
-      text: "Wareneingang",
-      onTap: () {},
-    ),
-    MenuItem(
-      imageLocation: "assets/icons/bestellung_icon.png",
-      text: "Bestellung",
-      onTap: () {},
-    ),
-  ];
   @override
   Widget build(BuildContext context) {
+    List<MenuItem> menuItems = [
+      MenuItem(
+        imageLocation: "assets/icons/scanner.png",
+        text: "Teil-Inventur",
+        addBackground: true,
+        onTap: () {
+          Navigator.of(context).pushNamed(scannerScreen);
+        },
+      ),
+      MenuItem(
+        imageLocation: "assets/icons/inventory_icon.png",
+        text: "Inventur",
+        addBackground: true,
+        onTap: () {},
+      ),
+      MenuItem(
+        imageLocation: "assets/icons/wareneingang_icon.png",
+        text: "Wareneingang",
+        addBackground: true,
+        onTap: () {},
+      ),
+      MenuItem(
+        imageLocation: "assets/icons/bestellung_icon.png",
+        text: "Bestellung",
+        addBackground: true,
+        onTap: () {},
+      ),
+      MenuItem(
+        imageLocation: "assets/icons/shop2shop_icon.png",
+        text: "Umlagerung",
+        onTap: () {},
+      ),
+      MenuItem(
+        imageLocation: "assets/icons/artikel_icon.png",
+        text: "Waren",
+        onTap: () {},
+      ),
+    ];
     return Scaffold(
+      appBar: AppBarPro(
+        actions: [
+          IconButton(
+            iconSize: 24,
+            icon: Icon(
+              Icons.shop,
+              color: HexColor("424D51"),
+            ),
+            onPressed: () {},
+          ),
+          IconButton(
+            iconSize: 24,
+            icon: Icon(
+              Icons.logout,
+              color: HexColor("424D51"),
+            ),
+            onPressed: () {},
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -64,7 +102,6 @@ class _StartScreenState extends State<StartScreen> {
                 },
               ),
             ),
-            const TelenormaCopyrights(),
           ],
         ),
       ),

@@ -4,9 +4,7 @@ import 'package:flutter_hex_color/flutter_hex_color.dart';
 import 'package:hf/app_router.dart';
 import 'package:hf/business_logic_layer/bloc_observer.dart';
 import 'package:hf/constants/strings.dart';
-import 'package:bloc/bloc.dart';
 import 'package:hf/custom_bloc_provider.dart';
-
 
 void main() {
   //SystemUiOverlayStyle is for Upper icons (wifi,etc...)
