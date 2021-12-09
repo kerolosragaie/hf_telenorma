@@ -1,13 +1,13 @@
-import 'package:hf/data_layer/api/shop_api.dart';
+import 'package:hf/data_layer/api/shops_services.dart';
 import 'package:hf/data_layer/models/shops.dart';
 
 class ShopsRepository {
-  final ShopApi shopApi;
+  final ShopServices shopServices;
 
-  ShopsRepository(this.shopApi);
+  ShopsRepository(this.shopServices);
 
   Future<List<Shops>> getAllShops() async {
-    final shopsList = await shopApi.getAllShops();
+    final shopsList = await shopServices.getAllShops();
     return shopsList.map((shop) => Shops.fromJson(shop)).toList();
   }
 }

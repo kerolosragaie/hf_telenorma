@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_hex_color/flutter_hex_color.dart';
-import 'package:hf/constants/colors.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hf/business_logic_layer/cubit/inventurs_cubit.dart';
+import 'package:hf/business_logic_layer/cubit/shops_cubit.dart';
 import 'package:hf/constants/strings.dart';
 import 'package:hf/data_layer/models/inventurs.dart';
+import 'package:hf/data_layer/models/shops.dart';
 import 'package:hf/presentation_layer/widgets/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -24,6 +28,11 @@ class _TeilInventurScreenState extends State<TeilInventurScreen> {
   final formKey = GlobalKey<FormState>();
   FormType _formType = FormType.aktiv;
 
+  //For calling APIs:
+  late List<Shops> allShops;
+  late InventursCubit inventursCubit;
+  late List<Inventurs> allInventurs;
+
   void moveToAktiv() {
     formKey.currentState!.reset();
     setState(() {
@@ -39,34 +48,53 @@ class _TeilInventurScreenState extends State<TeilInventurScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    SchedulerBinding.instance!.addPostFrameCallback((_) {
+      BlocProvider.of<ShopsCubit>(context).getAllShops();
+      /*  inventursCubit = BlocProvider.of<InventursCubit>(context);
+      inventursCubit.getAllInventurs(); */
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const AppBarPro(
         addBackButton: true,
         title: "Teil-Inventur",
       ),
-      body: Form(
-        key: formKey,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
-              margin: const EdgeInsets.only(bottom: 32),
-              child: ToggleButtonPro(
-                onTapAktiv: () {
-                  moveToAktiv();
-                },
-                onTapArchiv: () {
-                  moveToArchiv();
-                },
-              ),
+      body: BlocBuilder<ShopsCubit, ShopsState>(builder: (context, state) {
+        if (state is ShopsLoadedState) {
+          allShops = (state).shops;
+          return Form(
+            key: formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(bottom: 32),
+                  child: ToggleButtonPro(
+                    onTapAktiv: () {
+                      moveToAktiv();
+                    },
+                    onTapArchiv: () {
+                      moveToArchiv();
+                    },
+                  ),
+                ),
+                Column(
+                  children: forms(),
+                ),
+              ],
             ),
-            Column(
-              children: forms(),
-            ),
-          ],
-        ),
-      ),
+          );
+        } else {
+          return const Center(
+            child: Text("Loading..."),
+          );
+        }
+      }),
     );
   }
 
@@ -85,13 +113,14 @@ class _TeilInventurScreenState extends State<TeilInventurScreen> {
         SizedBox(
           height: MediaQuery.of(context).size.height / 2,
           child: ListView.builder(
-            itemCount: 3,
+            itemCount: allShops.length,
             itemBuilder: (context, index) {
               //TODO: Something wrong with model:
               return _TeilInventurItem(
+                currentShop: allShops[index],
                 currentInventur: Inventurs(
-                  id: "${index + 2}",
-                  shopId: "42515",
+                  id: allShops[index].id,
+                  shopId: allShops[index].id,
                   modifiedAt: "16.9.2021",
                 ),
                 onTap: () {
@@ -208,10 +237,15 @@ class _TableHeader extends StatelessWidget {
 
 //Single item of table:
 class _TeilInventurItem extends StatelessWidget {
+  final Shops currentShop;
   final Inventurs currentInventur;
   final Function? onTap;
-  const _TeilInventurItem({Key? key, required this.currentInventur, this.onTap})
-      : super(key: key);
+  const _TeilInventurItem({
+    Key? key,
+    required this.currentShop,
+    required this.currentInventur,
+    this.onTap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -235,7 +269,7 @@ class _TeilInventurItem extends StatelessWidget {
               width: 60,
               child: Center(
                 child: Text(
-                  currentInventur.id.toString(),
+                  currentShop.id.toString(),
                   maxLines: 1,
                   style: GoogleFonts.raleway(
                     textStyle: TextStyle(
@@ -252,7 +286,7 @@ class _TeilInventurItem extends StatelessWidget {
               width: 60,
               child: Center(
                 child: Text(
-                  "unkown",
+                  currentShop.title,
                   maxLines: 1,
                   style: GoogleFonts.raleway(
                     textStyle: TextStyle(
@@ -286,7 +320,7 @@ class _TeilInventurItem extends StatelessWidget {
               width: 60,
               child: Center(
                 child: Text(
-                  currentInventur.shopId.toString(),
+                  "44",
                   maxLines: 1,
                   style: GoogleFonts.raleway(
                     textStyle: TextStyle(

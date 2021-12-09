@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hf/app_router.dart';
-import 'package:hf/business_logic_layer/cubit/inventory_cubit.dart';
-import 'package:hf/data_layer/api/shop_api.dart';
+import 'package:hf/business_logic_layer/cubit/shops_cubit.dart';
+import 'package:hf/data_layer/api/shops_services.dart';
 import 'package:hf/data_layer/repository/shops_repository.dart';
 import 'package:hf/main.dart';
 
@@ -16,8 +16,8 @@ class Core extends StatelessWidget {
     InventoryCubit inventoryCubit;*/
     return MultiBlocProvider(
       providers: [
-        BlocProvider<InventoryCubit>(
-          create: (context) => InventoryCubit(ShopsRepository(ShopApi())),
+        BlocProvider<ShopsCubit>(
+          create: (context) => ShopsCubit(ShopsRepository(ShopServices())),
         )
       ],
       child: HF(
