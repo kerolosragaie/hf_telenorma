@@ -12,12 +12,12 @@ class InventoryCubit extends Cubit<InventoryState> {
   InventoryCubit(this.shopsRepository) : super(InventoryInitialState());
   //static InventoryCubit get(context) => BlocProvider.of(context);
 
-List<Shops> getAllShops(){
-  shopsRepository.getAllShops().then((shops) {
-    emit(ShopsLoadedState(shops));
-    this.shops = shops;
-  });
+  List<Shops> getAllShops() {
+    shopsRepository.getAllShops().then((shops) {
+      emit(ShopsLoadedState(shops));
+      this.shops = shops;
+    });
 
-  return shops;
-}
+    return shops;
+  }
 }

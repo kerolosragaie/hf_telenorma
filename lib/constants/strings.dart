@@ -1,4 +1,6 @@
 // BaseUrl
+import 'package:hf/presentation_layer/screens/teilinventur_screen.dart';
+
 const baseUrl = 'https://look54.kassesvn.tn-rechenzentrum1.de/api/';
 // License Key for First page
 const license = "E3h1f2b1n4h1E3Q1";
@@ -12,3 +14,5 @@ const licenseKeyScreen = '/LicenseKeyScreen';
 const loginScreen = '/loginScreen';
 const startScreen = '/startScreen';
 const scannerScreen = '/scannerScreen';
+const teilInventurScreen = '/teilInventurScreen';
+const teilInventurViewerScreen = '/teilInventurViewerScreen';

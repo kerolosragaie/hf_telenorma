@@ -29,7 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 textEditingController: userNameController,
                 textInputType: TextInputType.text,
                 validator: (val) {
-                  if (val.toString().isEmpty){
+                  if (val.toString().isEmpty) {
                     return "Dies ist ein Pflichtfeld";
                   }
                 },
@@ -43,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 textEditingController: passwordController,
                 textInputType: TextInputType.visiblePassword,
                 validator: (val) {
-                  if (val.toString().isEmpty){
+                  if (val.toString().isEmpty) {
                     return "Dies ist ein Pflichtfeld";
                   }
                 },

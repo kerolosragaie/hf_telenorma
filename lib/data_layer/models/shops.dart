@@ -4,7 +4,6 @@ class Shops {
   late String street;
   late String isStore;
 
-
   Shops.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
@@ -17,7 +16,7 @@ class Shops {
     data['id'] = id;
     data['title'] = title;
     data['street'] = street;
-    data['is_store'] =isStore;
+    data['is_store'] = isStore;
     return data;
   }
 }

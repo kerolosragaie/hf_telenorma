@@ -19,7 +19,7 @@ class _StartScreenState extends State<StartScreen> {
         text: "Teil-Inventur",
         addBackground: true,
         onTap: () {
-          Navigator.of(context).pushNamed(scannerScreen);
+          Navigator.of(context).pushNamed(teilInventurScreen);
         },
       ),
       MenuItem(
@@ -54,6 +54,7 @@ class _StartScreenState extends State<StartScreen> {
     return Scaffold(
       appBar: AppBarPro(
         actions: [
+          //TODO: add functionallty here:
           IconButton(
             iconSize: 24,
             icon: Icon(

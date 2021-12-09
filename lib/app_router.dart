@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:hf/data_layer/models/inventurs.dart';
 import 'package:hf/presentation_layer/screens/scanner_screen.dart';
 import 'package:hf/presentation_layer/screens/start_screen.dart';
+import 'package:hf/presentation_layer/screens/teilinventur_screen.dart';
+import 'package:hf/presentation_layer/screens/teilinventur_viewer_screen.dart';
 import 'constants/strings.dart';
 import 'presentation_layer/screens/pages.dart';
 
@@ -17,6 +20,15 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const StartScreen());
       case scannerScreen:
         return MaterialPageRoute(builder: (_) => const ScannerScreen());
+      case teilInventurScreen:
+        return MaterialPageRoute(builder: (_) => const TeilInventurScreen());
+      case teilInventurViewerScreen:
+        //TODO: pass value from TeilInventurScreen:
+        return MaterialPageRoute(
+          builder: (_) => TeilInventurViewerScreen(
+            currentInventur: Inventurs(),
+          ),
+        );
     }
   }
 }
