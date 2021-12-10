@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hf/presentation_layer/widgets/widgets.dart';
 
@@ -29,7 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 textEditingController: userNameController,
                 textInputType: TextInputType.text,
                 validator: (val) {
-                  if (val.toString().isEmpty){
+                  if (val.toString().isEmpty) {
                     return "Dies ist ein Pflichtfeld";
                   }
                 },
@@ -43,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 textEditingController: passwordController,
                 textInputType: TextInputType.visiblePassword,
                 validator: (val) {
-                  if (val.toString().isEmpty){
+                  if (val.toString().isEmpty) {
                     return "Dies ist ein Pflichtfeld";
                   }
                 },

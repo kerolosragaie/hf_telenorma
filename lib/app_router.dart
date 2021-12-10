@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hf/presentation_layer/screens/scanner_screen.dart';
 import 'package:hf/presentation_layer/screens/start_screen.dart';
 import 'constants/strings.dart';
-import 'presentation_layer/screens/inventur_screen.dart';
 import 'presentation_layer/screens/pages.dart';
 
 class AppRouter {
@@ -18,8 +17,6 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const StartScreen());
       case scannerScreen:
         return MaterialPageRoute(builder: (_) => const ScannerScreen());
-      case inventurScreen:
-        return MaterialPageRoute(builder: (_) => const InventurScreen());
     }
   }
 }
