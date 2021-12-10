@@ -12,7 +12,7 @@ class ShopsLoadedState extends ShopsState {
 }
 
 class ShopsErrorState extends ShopsState {
-  final error;
+  final String error;
 
   ShopsErrorState(this.error);
 }

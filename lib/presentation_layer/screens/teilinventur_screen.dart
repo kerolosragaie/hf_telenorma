@@ -30,7 +30,6 @@ class _TeilInventurScreenState extends State<TeilInventurScreen> {
 
   //For calling APIs:
   late List<Shops> allShops;
-  late InventursCubit inventursCubit;
   late List<Inventurs> allInventurs;
 
   void moveToAktiv() {
@@ -52,8 +51,7 @@ class _TeilInventurScreenState extends State<TeilInventurScreen> {
     super.initState();
     SchedulerBinding.instance!.addPostFrameCallback((_) {
       BlocProvider.of<ShopsCubit>(context).getAllShops();
-      /*  inventursCubit = BlocProvider.of<InventursCubit>(context);
-      inventursCubit.getAllInventurs(); */
+      BlocProvider.of<InventursCubit>(context).getAllInventurs();
     });
   }
 
@@ -64,30 +62,41 @@ class _TeilInventurScreenState extends State<TeilInventurScreen> {
         addBackButton: true,
         title: "Teil-Inventur",
       ),
-      body: BlocBuilder<ShopsCubit, ShopsState>(builder: (context, state) {
-        if (state is ShopsLoadedState) {
-          allShops = (state).shops;
-          return Form(
-            key: formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(bottom: 32),
-                  child: ToggleButtonPro(
-                    onTapAktiv: () {
-                      moveToAktiv();
-                    },
-                    onTapArchiv: () {
-                      moveToArchiv();
-                    },
+      body: BlocBuilder<ShopsCubit, ShopsState>(builder: (context, shopsState) {
+        if (shopsState is ShopsLoadedState) {
+          allShops = (shopsState).shops;
+          return BlocBuilder<InventursCubit, InventursState>(
+            builder: (context, inventursState) {
+              if (inventursState is InventursLoaded) {
+                allInventurs = (inventursState).inventurs;
+                return Form(
+                  key: formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(bottom: 32),
+                        child: ToggleButtonPro(
+                          onTapAktiv: () {
+                            moveToAktiv();
+                          },
+                          onTapArchiv: () {
+                            moveToArchiv();
+                          },
+                        ),
+                      ),
+                      Column(
+                        children: forms(),
+                      ),
+                    ],
                   ),
-                ),
-                Column(
-                  children: forms(),
-                ),
-              ],
-            ),
+                );
+              } else {
+                return const Center(
+                  child: Text("Loading..."),
+                );
+              }
+            },
           );
         } else {
           return const Center(
@@ -95,6 +104,47 @@ class _TeilInventurScreenState extends State<TeilInventurScreen> {
           );
         }
       }),
+      /* body: MultiBlocListener(
+        listeners: [
+          BlocListener<ShopsCubit, ShopsState>(
+            listener: (context, state) {
+              if (state is ShopsLoadedState) {
+                allShops = (state).shops;
+                print(allShops);
+              }
+            },
+          ),
+          BlocListener<InventursCubit, InventursState>(
+            listener: (context, state) {
+              if (state is InventursLoaded) {
+                allInventurs = (state).inventurs;
+              }
+            },
+          ),
+        ],
+        child: Form(
+          key: formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                margin: const EdgeInsets.only(bottom: 32),
+                child: ToggleButtonPro(
+                  onTapAktiv: () {
+                    moveToAktiv();
+                  },
+                  onTapArchiv: () {
+                    moveToArchiv();
+                  },
+                ),
+              ),
+              Column(
+                children: forms(),
+              ),
+            ],
+          ),
+        ),
+      ), */
     );
   }
 
@@ -115,14 +165,10 @@ class _TeilInventurScreenState extends State<TeilInventurScreen> {
           child: ListView.builder(
             itemCount: allShops.length,
             itemBuilder: (context, index) {
-              //TODO: Something wrong with model:
+              //TODO: Something wrong with model(wrong from API):
               return _TeilInventurItem(
                 currentShop: allShops[index],
-                currentInventur: Inventurs(
-                  id: allShops[index].id,
-                  shopId: allShops[index].id,
-                  modifiedAt: "16.9.2021",
-                ),
+                currentInventur: allInventurs[index],
                 onTap: () {
                   Navigator.of(context)
                       .pushNamed(teilInventurViewerScreen, arguments: {
