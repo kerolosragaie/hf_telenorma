@@ -64,6 +64,8 @@ dev_dependencies:
   flutter_bloc:
   bloc:
   flutter_offline: ^2.0.0
+  # displaying Toast Message
+  fluttertoast: ^8.0.8
 
 
 

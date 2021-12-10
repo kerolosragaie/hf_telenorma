@@ -66,7 +66,7 @@ class _LicenseKeyScreenState extends State<LicenseKeyScreen> {
                       Navigator.of(context).pushNamed(loginScreen);
                     }
                     else{
-                      showAlertDialog(context);
+                      showErrorAlertDialog(context);
 
                     }
                   });
