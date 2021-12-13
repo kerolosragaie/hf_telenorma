@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hex_color/flutter_hex_color.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hf/constants/navigate_to_screens.dart';
+import 'package:hf/presentation_layer/screens/pages.dart';
 import 'package:hf/presentation_layer/widgets/dispaly_dialog.dart';
 import 'package:hf/presentation_layer/widgets/widgets.dart';
 
@@ -37,7 +39,7 @@ class _InventurScreenState extends State<InventurScreen> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back,color: Colors.black,),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.of(context).pop();
           },
         ),
       ),

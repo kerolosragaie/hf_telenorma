@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hex_color/flutter_hex_color.dart';
+import 'package:hf/constants/navigate_to_screens.dart';
 import 'package:hf/constants/strings.dart';
+import 'package:hf/presentation_layer/screens/inventur_screen.dart';
 import 'package:hf/presentation_layer/widgets/widgets.dart';
 
 class StartScreen extends StatefulWidget {
@@ -26,7 +28,9 @@ class _StartScreenState extends State<StartScreen> {
         imageLocation: "assets/icons/inventory_icon.png",
         text: "Inventur",
         addBackground: true,
-        onTap: () {},
+        onTap: () {
+          Navigator.of(context).pushNamed(inventurScreen);
+        },
       ),
       MenuItem(
         imageLocation: "assets/icons/wareneingang_icon.png",

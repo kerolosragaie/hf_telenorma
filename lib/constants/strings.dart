@@ -13,5 +13,6 @@ const licenseKeyScreen = '/LicenseKeyScreen';
 const loginScreen = '/loginScreen';
 const startScreen = '/startScreen';
 const scannerScreen = '/scannerScreen';
+const inventurScreen = '/inventurScreen';
 const teilInventurScreen = '/teilInventurScreen';
 const teilInventurViewerScreen = '/teilInventurViewerScreen';

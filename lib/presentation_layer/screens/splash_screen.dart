@@ -28,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
         height: 80,
         color: HexColor("FF9800"),
       ),*/
-      nextScreen: const InventurScreen(),
+      nextScreen: const StartScreen(),
     );
   }
 }
