@@ -32,6 +32,8 @@ class _TeilInventurScreenState extends State<TeilInventurScreen> {
   late List<Shops> allShops;
   late List<Inventurs> allInventurs;
 
+  late ShopsCubit shops;
+
   void moveToAktiv() {
     formKey.currentState!.reset();
     setState(() {

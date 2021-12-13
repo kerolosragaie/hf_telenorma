@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class TeilInventurViewerScreen extends StatefulWidget {
   final Inventurs currentInventur;
+
   const TeilInventurViewerScreen({Key? key, required this.currentInventur})
       : super(key: key);
 
@@ -99,6 +100,7 @@ class _TeilInventurViewerScreenState extends State<TeilInventurViewerScreen> {
 //Titles in column of the table:
 class _TableHeader extends StatelessWidget {
   const _TableHeader({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -204,6 +206,7 @@ class _TableHeader extends StatelessWidget {
 class _TeilInventurViewerItem extends StatelessWidget {
   final Inventurs currentInventur;
   final Function? onTap;
+
   const _TeilInventurViewerItem(
       {Key? key, required this.currentInventur, this.onTap})
       : super(key: key);

@@ -63,83 +63,164 @@ showAlertDialog(BuildContext context) {
 String _dropDownValue = "Geschäft auswählen";
 final items = ["Geschäft auswählen", "Schloss", "Kudamm", "LP12", "G14", "Lager", "Bikini", "Test12"];
 
-Widget buildSheet() => Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Text(
-            "Neue Inventur",
-            style: GoogleFonts.raleway(
-              textStyle: TextStyle(
-                  color: HexColor("#424D51"),
-                  fontSize: 30,
-                  fontStyle: FontStyle.normal,
-                  fontWeight: FontWeight.bold),
+Widget buildSheet() => SingleChildScrollView(
+  child:   Column(
+  
+        crossAxisAlignment: CrossAxisAlignment.start,
+  
+        children: [
+  
+          Padding(
+  
+            padding: const EdgeInsets.all(15.0),
+  
+            child: Text(
+  
+              "Neue Inventur",
+  
+              style: GoogleFonts.raleway(
+  
+                textStyle: TextStyle(
+  
+                    color: HexColor("#424D51"),
+  
+                    fontSize: 30,
+  
+                    fontStyle: FontStyle.normal,
+  
+                    fontWeight: FontWeight.bold),
+  
+              ),
+  
             ),
+  
           ),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Text(
-            "Geschäft auswählen",
-            style: GoogleFonts.raleway(
-              textStyle: TextStyle(
-                  color: HexColor("#5E5E5F"),
-                  fontSize: 15,
-                  fontStyle: FontStyle.normal,
-                  fontWeight: FontWeight.bold),
+  
+          const SizedBox(
+  
+            height: 10,
+  
+          ),
+  
+          Padding(
+  
+            padding: const EdgeInsets.all(15.0),
+  
+            child: Text(
+  
+              "Geschäft auswählen",
+  
+              style: GoogleFonts.raleway(
+  
+                textStyle: TextStyle(
+  
+                    color: HexColor("#5E5E5F"),
+  
+                    fontSize: 15,
+  
+                    fontStyle: FontStyle.normal,
+  
+                    fontWeight: FontWeight.bold),
+  
+              ),
+  
             ),
+  
           ),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: DropdownButton(
-            value: _dropDownValue,
-            isExpanded: true,
-            icon: const Icon(Icons.keyboard_arrow_down),
-            items: items.map((item) {
-              return DropdownMenuItem<String>(
-                value: item,
-                enabled: true,
-                alignment: AlignmentDirectional.centerStart,
-                child: Text(item),
-              );
-            }
-            ).toList(),
-            onChanged: (String? newVal) {
-              _dropDownValue = newVal!;
-            },
+  
+          const SizedBox(
+  
+            height: 10,
+  
           ),
-        ),
-        SizedBox(height: 15,),
-        Container(
-          padding: EdgeInsets.all(15.0),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5.0),
-            
+  
+          Padding(
+  
+            padding: const EdgeInsets.all(15.0),
+  
+            child: DropdownButton(
+  
+              value: _dropDownValue,
+  
+              isExpanded: true,
+  
+              icon: const Icon(Icons.keyboard_arrow_down),
+  
+              items: items.map((item) {
+  
+                return DropdownMenuItem<String>(
+  
+                  value: item,
+  
+                  enabled: true,
+  
+                  alignment: AlignmentDirectional.centerStart,
+  
+                  child: Text(item),
+  
+                );
+  
+              }
+  
+              ).toList(),
+  
+              onChanged: (String? newVal) {
+  
+                _dropDownValue = newVal!;
+  
+              },
+  
+            ),
+  
           ),
-          child: TextFormFieldPro(
-            title: "Kommentar",
-            hintText: "comment",
-            textInputType: TextInputType.text,
-            textEditingController: commentController,
-            validator: (val) {},
+  
+          SizedBox(height: 15,),
+  
+          Container(
+  
+            padding: EdgeInsets.all(15.0),
+  
+            decoration: BoxDecoration(
+  
+              borderRadius: BorderRadius.circular(5.0),
+  
+              
+  
+            ),
+  
+            child: TextFormFieldPro(
+  
+              title: "Kommentar",
+  
+              hintText: "comment",
+  
+              textInputType: TextInputType.text,
+  
+              textEditingController: commentController,
+  
+              validator: (val) {},
+  
+            ),
+  
           ),
-        ),
-        SizedBox(height: 15,),
-        Center(
-          child: TextButtonPro(
-            title: 'INVENTUR STARTEN',
-            onPressed: (){},
+  
+          SizedBox(height: 15,),
+  
+          Center(
+  
+            child: TextButtonPro(
+  
+              title: 'INVENTUR STARTEN',
+  
+              onPressed: (){},
+  
+            ),
+  
           ),
-        ),
-
-      ],
-    );
+  
+  
+  
+        ],
+  
+      ),
+);

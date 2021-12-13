@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hex_color/flutter_hex_color.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hf/presentation_layer/widgets/dispaly_dialog.dart';
-import 'package:hf/presentation_layer/widgets/toggle_button.dart';
 import 'package:hf/presentation_layer/widgets/widgets.dart';
 
 class InventurScreen extends StatefulWidget {
@@ -52,15 +51,19 @@ class _InventurScreenState extends State<InventurScreen> {
                 Expanded(
                   child: Container(
                     width: 166,
-                      child: ToggleButtonPro(),
+                      child: ToggleButtonPro(
+                        onTapAktiv: (){},
+                        onTapArchiv: (){},
+
                   ),
                 ),
 
 
-              ],
+                )],
             ),
             SizedBox(height: 15,),
-            TextButtonPro(title: 'NEUE INVENTUR',onPressed: (){
+            TextButtonPro(title: 'NEUE INVENTUR',
+              onPressed: (){
               setState(() {
                 showAlertDialog(context);
               });
