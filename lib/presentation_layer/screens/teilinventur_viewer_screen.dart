@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hex_color/flutter_hex_color.dart';
 import 'package:hf/constants/strings.dart';
 import 'package:hf/data_layer/models/inventurs.dart';
+import 'package:hf/data_layer/models/products.dart';
+import 'package:hf/data_layer/models/shops.dart';
 import 'package:hf/presentation_layer/widgets/widgets.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class TeilInventurViewerScreen extends StatefulWidget {
-  final Inventurs currentInventur;
-  const TeilInventurViewerScreen({Key? key, required this.currentInventur})
+  final Shops currentShop;
+  const TeilInventurViewerScreen({Key? key, required this.currentShop})
       : super(key: key);
 
   @override
@@ -16,12 +17,21 @@ class TeilInventurViewerScreen extends StatefulWidget {
 }
 
 class _TeilInventurViewerScreenState extends State<TeilInventurViewerScreen> {
+//For calling APIs:
+  late List<Products> currentShopProducts;
+
+  @override
+  void initState() {
+    super.initState();
+    //TODO:how to connect Shops with products API
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarPro(
         addBackButton: true,
-        title: widget.currentInventur.id.toString(),
+        title: widget.currentShop.id,
       ),
       body: Column(
         children: [
@@ -55,7 +65,16 @@ class _TeilInventurViewerScreenState extends State<TeilInventurViewerScreen> {
               ],
             ),
           ),
-          const _TableHeader(),
+          //Table header here:
+          const TableHeader(
+            titles: [
+              "Artikel",
+              "EAN",
+              "VK",
+              "Menge Kasse",
+              "Menge",
+            ],
+          ),
           Expanded(
             flex: 5,
             child: ListView.builder(
@@ -96,110 +115,6 @@ class _TeilInventurViewerScreenState extends State<TeilInventurViewerScreen> {
   }
 }
 
-//Titles in column of the table:
-class _TableHeader extends StatelessWidget {
-  const _TableHeader({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 42,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        border: Border(
-          top: BorderSide(width: 1.0, color: HexColor("E2E2E2")),
-          bottom: BorderSide(width: 1.0, color: HexColor("E2E2E2")),
-        ),
-        color: Colors.white,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          SizedBox(
-            height: 30,
-            width: 60,
-            child: Center(
-              child: Text(
-                "Artikel",
-                style: GoogleFonts.raleway(
-                  textStyle: TextStyle(
-                      color: HexColor("424D51"),
-                      fontSize: 14,
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w500),
-                ),
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 30,
-            width: 60,
-            child: Center(
-              child: Text(
-                "EAN",
-                style: GoogleFonts.raleway(
-                  textStyle: TextStyle(
-                      color: HexColor("424D51"),
-                      fontSize: 14,
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w500),
-                ),
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 30,
-            width: 60,
-            child: Center(
-              child: Text(
-                "VK",
-                style: GoogleFonts.raleway(
-                  textStyle: TextStyle(
-                      color: HexColor("424D51"),
-                      fontSize: 14,
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w500),
-                ),
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 30,
-            width: 60,
-            child: Center(
-              child: Text(
-                "Menge Kasse",
-                style: GoogleFonts.raleway(
-                  textStyle: TextStyle(
-                      color: HexColor("424D51"),
-                      fontSize: 14,
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w500),
-                ),
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 30,
-            width: 60,
-            child: Center(
-              child: Text(
-                "Menge",
-                style: GoogleFonts.raleway(
-                  textStyle: TextStyle(
-                      color: HexColor("424D51"),
-                      fontSize: 14,
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w500),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 //Single item of table:
 class _TeilInventurViewerItem extends StatelessWidget {
   final Inventurs currentInventur;
@@ -212,106 +127,14 @@ class _TeilInventurViewerItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => onTap != null ? onTap!() : () {},
-      child: Container(
-        height: 42,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          border: Border(
-            top: BorderSide(width: 1.0, color: HexColor("E2E2E2")),
-            bottom: BorderSide(width: 1.0, color: HexColor("E2E2E2")),
-          ),
-          color: Colors.white,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            SizedBox(
-              height: 30,
-              width: 60,
-              child: Center(
-                child: Text(
-                  "345003309",
-                  maxLines: 1,
-                  style: GoogleFonts.raleway(
-                    textStyle: TextStyle(
-                        color: HexColor("424D51"),
-                        fontSize: 13,
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w400),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 30,
-              width: 60,
-              child: Center(
-                child: Text(
-                  "unkown",
-                  maxLines: 1,
-                  style: GoogleFonts.raleway(
-                    textStyle: TextStyle(
-                        color: HexColor("424D51"),
-                        fontSize: 13,
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w400),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 30,
-              width: 60,
-              child: Center(
-                child: Text(
-                  currentInventur.modifiedAt.toString(),
-                  maxLines: 1,
-                  style: GoogleFonts.raleway(
-                    textStyle: TextStyle(
-                        color: HexColor("424D51"),
-                        fontSize: 13,
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w400),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 30,
-              width: 60,
-              child: Center(
-                child: Text(
-                  currentInventur.shopId.toString(),
-                  maxLines: 1,
-                  style: GoogleFonts.raleway(
-                    textStyle: TextStyle(
-                        color: HexColor("424D51"),
-                        fontSize: 13,
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w400),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 30,
-              width: 60,
-              child: Center(
-                child: Text(
-                  currentInventur.shopId.toString(),
-                  maxLines: 1,
-                  style: GoogleFonts.raleway(
-                    textStyle: TextStyle(
-                        color: HexColor("424D51"),
-                        fontSize: 13,
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w400),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
+      child: const TableBody(
+        data: [
+          "null",
+          "null",
+          "null",
+          "null",
+          "null",
+        ],
       ),
     );
   }
