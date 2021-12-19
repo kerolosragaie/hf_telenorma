@@ -3,7 +3,7 @@ import 'package:hf/business_logic_layer/cubit/inventurs_cubit.dart';
 import 'package:hf/business_logic_layer/cubit/shops_cubit.dart';
 import 'package:hf/data_layer/api/inventurs_services.dart';
 import 'package:hf/data_layer/api/shops_services.dart';
-import 'package:hf/data_layer/models/inventurs.dart';
+import 'package:hf/data_layer/models/shops.dart';
 import 'package:hf/data_layer/repository/inventurs_repository.dart';
 import 'package:hf/data_layer/repository/shops_repository.dart';
 import 'package:hf/presentation_layer/screens/scanner_screen.dart';
@@ -58,7 +58,7 @@ class AppRouter {
         //TODO: pass value from TeilInventurScreen:
         return MaterialPageRoute(
           builder: (_) => TeilInventurViewerScreen(
-            currentInventur: Inventurs(),
+            currentShop: Shops(),
           ),
         );
     }

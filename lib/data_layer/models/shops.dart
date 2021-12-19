@@ -1,8 +1,10 @@
 class Shops {
-  late String id;
-  late String title;
-  late String street;
-  late String isStore;
+  String? id;
+  String? title;
+  String? street;
+  String? isStore;
+
+  Shops({this.id, this.title, this.street, this.isStore});
 
   Shops.fromJson(Map<String, dynamic> json) {
     id = json['id'];

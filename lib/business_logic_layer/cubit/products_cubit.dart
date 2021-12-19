@@ -17,4 +17,12 @@ class ProductsCubit extends Cubit<ProductsState> {
     });
     return products;
   }
+
+  List<Products> getShopsProducts(String ean) {
+    productsRepository.getShopsProducts(ean).then((products) {
+      emit(ProductsLoaded(products));
+      this.products = products;
+    });
+    return products;
+  }
 }

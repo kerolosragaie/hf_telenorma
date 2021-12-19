@@ -12,4 +12,16 @@ class ProductsServices {
       return [];
     }
   }
+
+  Future<List<dynamic>> getShopProducts(String ean) async {
+    try {
+      Response response =
+          await serviceManager.dio.get('products/ean/:ean', queryParameters: {
+        "ean": ean,
+      });
+      return response.data;
+    } catch (e) {
+      return [];
+    }
+  }
 }

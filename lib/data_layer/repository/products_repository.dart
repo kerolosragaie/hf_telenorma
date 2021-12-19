@@ -9,4 +9,9 @@ class ProductsRepository {
     final productsList = await productsServices.getAllProducts();
     return productsList.map((product) => Products.fromJson(product)).toList();
   }
+
+  Future<List<Products>> getShopsProducts(String ean) async {
+    final productsList = await productsServices.getShopProducts(ean);
+    return productsList.map((product) => Products.fromJson(product)).toList();
+  }
 }

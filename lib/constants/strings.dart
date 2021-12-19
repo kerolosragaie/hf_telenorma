@@ -15,3 +15,9 @@ const startScreen = '/startScreen';
 const scannerScreen = '/scannerScreen';
 const teilInventurScreen = '/teilInventurScreen';
 const teilInventurViewerScreen = '/teilInventurViewerScreen';
+
+//enum for form, to make change between forms
+enum FormType {
+  aktiv,
+  archiv,
+}

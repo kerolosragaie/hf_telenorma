@@ -8,3 +8,5 @@ export 'menu_item.dart';
 export 'appbar_pro.dart';
 export 'circleiconbutton.dart';
 export 'togglebutton_pro.dart';
+export 'table_header.dart';
+export 'table_body.dart';
