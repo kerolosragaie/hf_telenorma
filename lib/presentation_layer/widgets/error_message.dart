@@ -1,12 +1,11 @@
+
 import 'package:flutter/material.dart';
 
 showAlertDialog(BuildContext context) {
+
   // set up the button
   Widget okButton = TextButton(
-    child: const Text(
-      "ABBRECHEN",
-      style: TextStyle(color: Colors.black),
-    ),
+    child: Text("ABBRECHEN", style: TextStyle(color: Colors.black),),
     onPressed: () {
       Navigator.of(context).pop();
     },
@@ -14,7 +13,7 @@ showAlertDialog(BuildContext context) {
 
   // set up the AlertDialog
   AlertDialog alert = AlertDialog(
-    content: const Text("Customer does not exist."),
+    content: Text("Customer does not exist."),
     actions: [
       okButton,
     ],

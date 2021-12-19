@@ -64,8 +64,10 @@ class _LicenseKeyScreenState extends State<LicenseKeyScreen> {
                     if (await LicenseData.isLicenseFound()) {
                       Navigator.pop(context);
                       Navigator.of(context).pushNamed(loginScreen);
-                    } else {
+                    }
+                    else{
                       showAlertDialog(context);
+
                     }
                   });
                 },
@@ -91,6 +93,7 @@ class _Logo extends StatelessWidget {
       child: const Image(
         image: AssetImage('assets/logo_HF.jpg'),
       ),
+
     );
   }
 }

@@ -8,6 +8,7 @@ import 'package:hf/presentation_layer/widgets/widgets.dart';
 
 class TeilInventurViewerScreen extends StatefulWidget {
   final Shops currentShop;
+
   const TeilInventurViewerScreen({Key? key, required this.currentShop})
       : super(key: key);
 
@@ -119,6 +120,7 @@ class _TeilInventurViewerScreenState extends State<TeilInventurViewerScreen> {
 class _TeilInventurViewerItem extends StatelessWidget {
   final Inventurs currentInventur;
   final Function? onTap;
+
   const _TeilInventurViewerItem(
       {Key? key, required this.currentInventur, this.onTap})
       : super(key: key);

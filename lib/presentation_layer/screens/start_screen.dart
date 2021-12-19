@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hex_color/flutter_hex_color.dart';
+import 'package:hf/constants/navigate_to_screens.dart';
 import 'package:hf/constants/strings.dart';
+import 'package:hf/presentation_layer/screens/inventur_screen.dart';
 import 'package:hf/presentation_layer/widgets/widgets.dart';
 
 class StartScreen extends StatefulWidget {
@@ -19,14 +21,16 @@ class _StartScreenState extends State<StartScreen> {
         text: "Teil-Inventur",
         addBackground: true,
         onTap: () {
-          Navigator.of(context).pushNamed(teilInventurScreen);
+          Navigator.of(context).pushNamed(scannerScreen);
         },
       ),
       MenuItem(
         imageLocation: "assets/icons/inventory_icon.png",
         text: "Inventur",
         addBackground: true,
-        onTap: () {},
+        onTap: () {
+          Navigator.of(context).pushNamed(inventurScreen);
+        },
       ),
       MenuItem(
         imageLocation: "assets/icons/wareneingang_icon.png",
@@ -54,7 +58,6 @@ class _StartScreenState extends State<StartScreen> {
     return Scaffold(
       appBar: AppBarPro(
         actions: [
-          //TODO: add functionallty here:
           IconButton(
             iconSize: 24,
             icon: Icon(
