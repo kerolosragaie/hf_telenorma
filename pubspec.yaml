@@ -37,6 +37,8 @@ dependencies:
   flutter_launcher_icons: ^0.9.2
   animated_splash_screen: ^1.1.0
   # For project UI:
+  fluttertoast: ^8.0.8
+  google_fonts: ^2.1.0
   flutter_svg: ^0.23.0+1
   auto_size_text: ^3.0.0
   flutter_hex_color: ^2.0.0
@@ -44,30 +46,15 @@ dependencies:
   qr_code_scanner: ^0.6.1
   #For data:
   shared_preferences: ^2.0.9
+  dio: ^4.0.4
+  flutter_bloc:
+  bloc:
+  flutter_offline: ^2.0.0
   
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
-  flutter_lints: ^1.0.0
-  # fonts provided by google
-  google_fonts: ^2.1.0
-  # dio package for using Http request (url | POST| GET)
-  dio: ^4.0.4
-  # Bloc pattern is a way to organize your code which helps you to get good performance
-  flutter_bloc:
-  bloc:
-  flutter_offline: ^2.0.0
-  # displaying Toast Message
-  fluttertoast: ^8.0.8
-
-
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
