@@ -11,12 +11,6 @@ class ShopServices {
           await serviceManager.dio.get('shops', queryParameters: {
         "token": _token,
       });
-      if (response.data.toString().contains("error")) {
-        _token = await serviceManager.getToken(getNewToken: true);
-        response = await serviceManager.dio.get('shops', queryParameters: {
-          "token": _token,
-        });
-      }
       return response.data;
     } on DioError {
       return [];

@@ -38,7 +38,10 @@ class ServiceManager {
       }
     } else {
       final String? savedToken = _storage.getString(userToken);
-      return savedToken!;
+      if (savedToken == null) {
+        return await getToken(getNewToken: true);
+      }
+      return savedToken;
     }
   }
 }
