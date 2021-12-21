@@ -5,25 +5,35 @@ import 'textbutton_pro.dart';
 import 'textformfield_pro.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-TextEditingController commentController = TextEditingController();
-
-showAlertDialog(BuildContext context) {
+showNeueInventur({
+  required BuildContext context,
+  String? toastMessgeNein,
+  required List<String> shopsList,
+  required Function onSelectInventurStarten,
+  required TextEditingController kommentarController,
+  required Function onChangeValue,
+}) {
   // set up the buttons
   Widget okButton = TextButton(
+    //NEIN = No
     child: const Text("NEIN"),
     onPressed: () {
       Navigator.of(context).pop();
-      Fluttertoast.showToast(
-          msg: "Sie müssen zuerst die Bestände im Kassensystem auf Null setzen",
+      if (toastMessgeNein != null) {
+        Fluttertoast.showToast(
+          msg: toastMessgeNein,
           toastLength: Toast.LENGTH_LONG,
           gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: 1,
           backgroundColor: Colors.black,
           textColor: Colors.white,
-          fontSize: 16.0);
+          fontSize: 16.0,
+        );
+      }
     },
   );
   Widget continueButton = TextButton(
+    //JA = Yes
     child: const Text("JA"),
     onPressed: () {
       Navigator.of(context).pop();
@@ -34,7 +44,13 @@ showAlertDialog(BuildContext context) {
           ),
         ),
         context: context,
-        builder: (context) => buildSheet(),
+        builder: (context) => buildSheet(
+          context,
+          shopsList: shopsList,
+          onSelectInventurStarten: onSelectInventurStarten,
+          kommentarController: kommentarController,
+          onChangeValue: onChangeValue,
+        ),
       );
     },
   );
@@ -58,22 +74,18 @@ showAlertDialog(BuildContext context) {
   );
 }
 
-String _dropDownValue = "Geschäft auswählen";
-final items = [
-  "Geschäft auswählen",
-  "Schloss",
-  "Kudamm",
-  "LP12",
-  "G14",
-  "Lager",
-  "Bikini",
-  "Test12"
-];
-
-Widget buildSheet() => SingleChildScrollView(
+Widget buildSheet(
+  BuildContext context, {
+  required List<String> shopsList,
+  required Function onSelectInventurStarten,
+  required TextEditingController kommentarController,
+  required Function onChangeValue,
+}) =>
+    SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          //Dialog title:
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: Text(
@@ -90,6 +102,7 @@ Widget buildSheet() => SingleChildScrollView(
           const SizedBox(
             height: 10,
           ),
+          //Dropdown title:
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: Text(
@@ -106,49 +119,47 @@ Widget buildSheet() => SingleChildScrollView(
           const SizedBox(
             height: 10,
           ),
+          //Dropdown list:
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: DropdownButton(
-              value: _dropDownValue,
-              isExpanded: true,
-              icon: const Icon(Icons.keyboard_arrow_down),
-              items: items.map((item) {
-                return DropdownMenuItem<String>(
-                  value: item,
-                  enabled: true,
-                  alignment: AlignmentDirectional.centerStart,
-                  child: Text(item),
-                );
-              }).toList(),
-              onChanged: (String? newVal) {
-                _dropDownValue = newVal!;
-              },
-            ),
+                value: shopsList[0],
+                isExpanded: true,
+                icon: const Icon(Icons.keyboard_arrow_down),
+                items: shopsList.map((singleShop) {
+                  return DropdownMenuItem<String>(
+                    value: singleShop,
+                    enabled: true,
+                    alignment: AlignmentDirectional.centerStart,
+                    child: Text(singleShop),
+                  );
+                }).toList(),
+                onChanged: (String? newVal) => onChangeValue(newVal)),
           ),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
-          Container(
-            padding: EdgeInsets.all(15.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5.0),
-            ),
+          Padding(
+            padding: const EdgeInsets.all(15.0),
             child: TextFormFieldPro(
               title: "Kommentar",
               hintText: "comment",
               textInputType: TextInputType.text,
-              textEditingController: commentController,
+              textEditingController: kommentarController,
               validator: (val) {},
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           Center(
             child: TextButtonPro(
               title: 'INVENTUR STARTEN',
-              onPressed: () {},
+              onPressed: () => onSelectInventurStarten(),
             ),
+          ),
+          const SizedBox(
+            height: 10,
           ),
         ],
       ),

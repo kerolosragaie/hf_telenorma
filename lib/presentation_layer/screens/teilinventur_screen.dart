@@ -5,6 +5,7 @@ import 'package:hf/business_logic_layer/cubit/shops_cubit.dart';
 import 'package:hf/constants/strings.dart';
 import 'package:hf/data_layer/models/shops.dart';
 import 'package:hf/presentation_layer/screens/teilinventur_viewer_screen.dart';
+import 'package:hf/presentation_layer/widgets/dispaly_dialog.dart';
 import 'package:hf/presentation_layer/widgets/widgets.dart';
 
 class TeilInventurScreen extends StatefulWidget {
@@ -95,7 +96,27 @@ class _TeilInventurScreenState extends State<TeilInventurScreen> {
           margin: const EdgeInsets.only(bottom: 32),
           child: TextButtonPro(
             title: "Neue Teil-Inventur",
-            onPressed: () {},
+            onPressed: () {
+              TextEditingController kommentarController =
+                  TextEditingController();
+              showNeueInventur(
+                context: context,
+                toastMessgeNein: "Hello",
+                shopsList: [
+                  "ID",
+                  "Shop",
+                  "Erstel Datum",
+                  "Benutzer",
+                ],
+                onSelectInventurStarten: () {
+                  print("worked");
+                },
+                kommentarController: kommentarController,
+                onChangeValue: (val) {
+                  print(val);
+                },
+              );
+            },
           ),
         ),
         //Table header:
@@ -109,7 +130,7 @@ class _TeilInventurScreenState extends State<TeilInventurScreen> {
         ),
         //Table body:
         SizedBox(
-          height: MediaQuery.of(context).size.height / 2,
+          height: MediaQuery.of(context).size.height / 1.7,
           child: ListView.builder(
             itemCount: allShops.length,
             itemBuilder: (context, index) {
