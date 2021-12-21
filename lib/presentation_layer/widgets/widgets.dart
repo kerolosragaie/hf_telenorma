@@ -10,3 +10,4 @@ export 'circleiconbutton.dart';
 export 'togglebutton_pro.dart';
 export 'table_header.dart';
 export 'table_body.dart';
+export 'dispaly_dialog.dart';

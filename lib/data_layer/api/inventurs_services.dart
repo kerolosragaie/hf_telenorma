@@ -11,7 +11,7 @@ class InventursServices {
           await serviceManager.dio.get('inventurs', queryParameters: {
         "token": _token,
       });
-      if (response.data.toString().contains("error: Your token is expire")) {
+      if (response.data.toString().contains("error")) {
         _token = await serviceManager.getToken(getNewToken: true);
         response = await serviceManager.dio.get('inventurs', queryParameters: {
           "token": _token,
