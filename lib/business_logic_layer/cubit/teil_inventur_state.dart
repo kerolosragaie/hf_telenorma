@@ -7,7 +7,6 @@ class TeilInventurInitial extends TeilInventurState {}
 
 class TeilInventurLoadedState extends TeilInventurState {
   final List<TeilInventur> teilInventurs;
-
   TeilInventurLoadedState(this.teilInventurs);
 }
 

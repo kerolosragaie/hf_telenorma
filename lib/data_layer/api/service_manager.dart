@@ -24,7 +24,7 @@ class ServiceManager {
         });
 
         Response response = await dio.post(
-          'login',
+          'login/',
           data: formData,
         );
         final cleanToken = response.data

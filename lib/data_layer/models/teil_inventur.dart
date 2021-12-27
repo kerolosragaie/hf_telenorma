@@ -34,15 +34,15 @@ class TeilInventur {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = id;
-    data['kasse_id'] = kasseId;
-    data['user_id'] = userId;
-    data['shop_id'] = shopId;
-    data['bemerkung'] = bemerkung;
-    data['created'] = created;
-    data['modified'] = modified;
-    data['status'] = status;
-    data['kasse_document_id'] = kasseDocumentId;
+    data['id'] = this.id;
+    data['kasse_id'] = this.kasseId;
+    data['user_id'] = this.userId;
+    data['shop_id'] = this.shopId;
+    data['bemerkung'] = this.bemerkung;
+    data['created'] = this.created;
+    data['modified'] = this.modified;
+    data['status'] = this.status;
+    data['kasse_document_id'] = this.kasseDocumentId;
     return data;
   }
 }

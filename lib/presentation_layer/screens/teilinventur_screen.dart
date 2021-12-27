@@ -5,6 +5,7 @@ import 'package:hf/business_logic_layer/cubit/teil_inventur_cubit.dart';
 import 'package:hf/constants/strings.dart';
 import 'package:hf/data_layer/models/teil_inventur.dart';
 import 'package:hf/presentation_layer/widgets/widgets.dart';
+import 'package:logger/logger.dart';
 
 class TeilInventurScreen extends StatefulWidget {
   const TeilInventurScreen({Key? key}) : super(key: key);
@@ -179,8 +180,8 @@ class _TeilInventurItem extends StatelessWidget {
       child: TableBody(
         data: [
           currentTeilInventur.id.toString(),
-          currentTeilInventur.status,
-          DateTime.now().toString(),
+          currentTeilInventur.status.toString(),
+          currentTeilInventur.modified.toString(),
           "44"
         ],
       ),

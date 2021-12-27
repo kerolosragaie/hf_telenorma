@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hf/business_logic_layer/cubit/shops_cubit.dart';
+import 'package:hf/business_logic_layer/cubit/teil_inventur_cubit.dart';
 import 'package:hf/data_layer/api/shops_services.dart';
+import 'package:hf/data_layer/api/teil_inventur_services.dart';
 import 'package:hf/data_layer/models/shops.dart';
 import 'package:hf/data_layer/repository/shops_repository.dart';
+import 'package:hf/data_layer/repository/teil_inventur_repository.dart';
 import 'package:hf/presentation_layer/screens/inventur_screen.dart';
 import 'package:hf/presentation_layer/screens/scanner_screen.dart';
 import 'package:hf/presentation_layer/screens/teilinventur_screen.dart';
@@ -16,9 +19,15 @@ class AppRouter {
   late ShopsRepository shopsRepository;
   late ShopsCubit shopsCubit;
 
+  late TeilInventurRepository teilInventurRepository;
+  late TeilInventurCubit teilInventurCubit;
+
   AppRouter() {
     shopsRepository = ShopsRepository(ShopServices());
     shopsCubit = ShopsCubit(shopsRepository);
+
+    teilInventurRepository = TeilInventurRepository(TeilInventurServices());
+    teilInventurCubit = TeilInventurCubit(teilInventurRepository);
   }
 
   Route? generateRoute(RouteSettings settings) {
@@ -42,9 +51,9 @@ class AppRouter {
               BlocProvider<ShopsCubit>(
                 create: (context) => ShopsCubit(shopsRepository),
               ),
-              /* BlocProvider<InventursCubit>(
-                create: (context) => InventursCubit(inventursRepository),
-              ), */
+              BlocProvider<TeilInventurCubit>(
+                create: (context) => TeilInventurCubit(teilInventurRepository),
+              ),
             ],
             child: const TeilInventurScreen(),
           ),
