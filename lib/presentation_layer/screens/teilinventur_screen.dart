@@ -179,8 +179,8 @@ class _TeilInventurItem extends StatelessWidget {
       onTap: () => onTap != null ? onTap!() : () {},
       child: TableBody(
         data: [
-          currentTeilInventur.id.toString(),
-          currentTeilInventur.status.toString(),
+          currentTeilInventur.id,
+          currentTeilInventur.shopId,
           currentTeilInventur.modified.toString(),
           "44"
         ],
