@@ -1,11 +1,12 @@
-
 import 'package:flutter/material.dart';
 
 showAlertDialog(BuildContext context) {
-
   // set up the button
   Widget okButton = TextButton(
-    child: Text("ABBRECHEN", style: TextStyle(color: Colors.black),),
+    child: Text(
+      "ABBRECHEN",
+      style: TextStyle(color: Colors.black),
+    ),
     onPressed: () {
       Navigator.of(context).pop();
     },

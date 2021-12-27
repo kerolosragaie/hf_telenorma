@@ -14,8 +14,38 @@ class ServiceManager {
     );
     dio = Dio(options);
   }
-
   Future<String> getToken({bool getNewToken = false}) async {
+    SharedPreferences _storage = await SharedPreferences.getInstance();
+    if (getNewToken) {
+      try {
+        var formData = FormData.fromMap({
+          'secret_key':
+              'X23WkSAEYLBsKfvHs2Cf5DkLYPUskUGvX3VabzdufGNnH9uKxR8e4BQGe9X34DgZn33FZFCj9ZG3UDzun4BaZs8HqAeqSskEJHtXUgUQKU3cC2BQrPHgRn7zqfJWnRYNefDDFv7Qj8AYQ2HX',
+        });
+
+        Response response = await dio.post(
+          'login',
+          data: formData,
+        );
+        final cleanToken = response.data
+            .toString()
+            .replaceAll(RegExp(",|!|'|token:|{|}| "), '');
+        await _storage.setString(userToken, cleanToken);
+        return cleanToken;
+      } catch (e) {
+        return "";
+      }
+    } else {
+      final String? savedToken = _storage.getString(userToken);
+      if (savedToken == null) {
+        return await getToken(getNewToken: true);
+      }
+      return savedToken;
+    }
+  }
+
+  //get token from old API
+  /* Future<String> getToken({bool getNewToken = false}) async {
     SharedPreferences _storage = await SharedPreferences.getInstance();
     if (getNewToken) {
       try {
@@ -43,5 +73,6 @@ class ServiceManager {
       }
       return savedToken;
     }
-  }
+  } */
+
 }

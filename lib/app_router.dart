@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hf/business_logic_layer/cubit/inventurs_cubit.dart';
 import 'package:hf/business_logic_layer/cubit/shops_cubit.dart';
-import 'package:hf/data_layer/api/inventurs_services.dart';
 import 'package:hf/data_layer/api/shops_services.dart';
 import 'package:hf/data_layer/models/shops.dart';
-import 'package:hf/data_layer/repository/inventurs_repository.dart';
 import 'package:hf/data_layer/repository/shops_repository.dart';
 import 'package:hf/presentation_layer/screens/inventur_screen.dart';
 import 'package:hf/presentation_layer/screens/scanner_screen.dart';
@@ -18,15 +15,10 @@ class AppRouter {
   //For APIs:
   late ShopsRepository shopsRepository;
   late ShopsCubit shopsCubit;
-  late InventursRepository inventursRepository;
-  late InventursCubit inventursCubit;
 
   AppRouter() {
     shopsRepository = ShopsRepository(ShopServices());
     shopsCubit = ShopsCubit(shopsRepository);
-
-    inventursRepository = InventursRepository(InventursServices());
-    inventursCubit = InventursCubit(inventursRepository);
   }
 
   Route? generateRoute(RouteSettings settings) {
@@ -50,15 +42,15 @@ class AppRouter {
               BlocProvider<ShopsCubit>(
                 create: (context) => ShopsCubit(shopsRepository),
               ),
-              BlocProvider<InventursCubit>(
+              /* BlocProvider<InventursCubit>(
                 create: (context) => InventursCubit(inventursRepository),
-              ),
+              ), */
             ],
             child: const TeilInventurScreen(),
           ),
         );
       case teilInventurViewerScreen:
-      //TODO: pass value from TeilInventurScreen:
+        //TODO: pass value from TeilInventurScreen:
         return MaterialPageRoute(
           builder: (_) => TeilInventurViewerScreen(
             currentShop: Shops(),

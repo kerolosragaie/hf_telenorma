@@ -1,5 +1,8 @@
 // BaseUrl
-const baseUrl = 'https://look54.kassesvn.tn-rechenzentrum1.de/api/';
+const baseUrl =
+    'https://mde.native-telenorma.hosting5-p.tn-rechenzentrum1.de/api/';
+//old API:
+//const baseUrl = 'https://look54.kassesvn.tn-rechenzentrum1.de/api/';
 // License Key for First page
 const license = "E3h1f2b1n4h1E3Q1";
 // Login & Password for Second Page
