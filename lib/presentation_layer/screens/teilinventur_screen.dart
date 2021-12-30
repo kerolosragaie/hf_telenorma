@@ -142,8 +142,8 @@ class _TeilInventurScreenState extends State<TeilInventurScreen> {
                     allShops = (shopState).shopsList;
                     return _TeilInventurItem(
                       currentTeilInventur: allTeilInventurs[index],
-                      //TODO: how to compare two lists and return a single value
-                      currentShop: allShops[index],
+                      currentShop:
+                          _getShopData(allTeilInventurs[index], allShops),
                       onTap: () {
                         /* Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => TeilInventurViewerScreen(
@@ -177,12 +177,22 @@ class _TeilInventurScreenState extends State<TeilInventurScreen> {
       ];
     }
   }
+
+  //? This function to get shop data of single teil inventur:
+  Shop _getShopData(TeilInventur _currTeilInventur, List<Shop> _allShops) {
+    for (int i = 0; i < _allShops.length; i++) {
+      if (_currTeilInventur.kasseId == _allShops[i].kasseId) {
+        return _allShops[i];
+      }
+    }
+    return Shop();
+  }
 }
 
 //Single item of table:
 class _TeilInventurItem extends StatelessWidget {
   final TeilInventur currentTeilInventur;
-  final currentShop;
+  final Shop currentShop;
   final Function? onTap;
   const _TeilInventurItem({
     Key? key,

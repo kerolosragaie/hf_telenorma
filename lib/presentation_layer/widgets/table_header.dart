@@ -28,6 +28,8 @@ class TableHeader extends StatelessWidget {
             child: Center(
               child: Text(
                 titles[index],
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
                 style: GoogleFonts.raleway(
                   textStyle: TextStyle(
                       color: HexColor("424D51"),
