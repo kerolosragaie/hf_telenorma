@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hf/business_logic_layer/cubit/shops_cubit.dart';
 import 'package:hf/business_logic_layer/cubit/teil_inventur_cubit.dart';
-import 'package:hf/data_layer/api/shops_services.dart';
+import 'package:hf/data_layer/api/shop_services.dart';
 import 'package:hf/data_layer/api/teil_inventur_services.dart';
-import 'package:hf/data_layer/models/shops.dart';
-import 'package:hf/data_layer/repository/shops_repository.dart';
+import 'package:hf/data_layer/models/shop.dart';
+import 'package:hf/data_layer/repository/shop_repository.dart';
 import 'package:hf/data_layer/repository/teil_inventur_repository.dart';
 import 'package:hf/presentation_layer/screens/inventur_screen.dart';
 import 'package:hf/presentation_layer/screens/scanner_screen.dart';
@@ -16,15 +16,15 @@ import 'presentation_layer/screens/pages.dart';
 
 class AppRouter {
   //For APIs:
-  late ShopsRepository shopsRepository;
-  late ShopsCubit shopsCubit;
+  late ShopRepository shopsRepository;
+  late ShopCubit shopsCubit;
 
   late TeilInventurRepository teilInventurRepository;
   late TeilInventurCubit teilInventurCubit;
 
   AppRouter() {
-    shopsRepository = ShopsRepository(ShopServices());
-    shopsCubit = ShopsCubit(shopsRepository);
+    shopsRepository = ShopRepository(ShopServices());
+    shopsCubit = ShopCubit(shopsRepository);
 
     teilInventurRepository = TeilInventurRepository(TeilInventurServices());
     teilInventurCubit = TeilInventurCubit(teilInventurRepository);
@@ -48,8 +48,8 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => MultiBlocProvider(
             providers: [
-              BlocProvider<ShopsCubit>(
-                create: (context) => ShopsCubit(shopsRepository),
+              BlocProvider<ShopCubit>(
+                create: (context) => ShopCubit(shopsRepository),
               ),
               BlocProvider<TeilInventurCubit>(
                 create: (context) => TeilInventurCubit(teilInventurRepository),
@@ -62,7 +62,7 @@ class AppRouter {
         //TODO: pass value from TeilInventurScreen:
         return MaterialPageRoute(
           builder: (_) => TeilInventurViewerScreen(
-            currentShop: Shops(),
+            currentShop: Shop(),
           ),
         );
     }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_hex_color/flutter_hex_color.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'textbutton_pro.dart';
@@ -44,8 +45,7 @@ showNeueInventur({
           ),
         ),
         context: context,
-        builder: (context) => buildSheet(
-          context,
+        builder: (context) => _BuildSheetPro(
           shopsList: shopsList,
           onSelectInventurStarten: onSelectInventurStarten,
           kommentarController: kommentarController,
@@ -74,14 +74,38 @@ showNeueInventur({
   );
 }
 
-Widget buildSheet(
-  BuildContext context, {
-  required List<String> shopsList,
-  required Function onSelectInventurStarten,
-  required TextEditingController kommentarController,
-  required Function onChangeValue,
-}) =>
-    SingleChildScrollView(
+class _BuildSheetPro extends StatefulWidget {
+  final List<String> shopsList;
+  final Function onSelectInventurStarten;
+  final TextEditingController kommentarController;
+  final Function onChangeValue;
+  const _BuildSheetPro(
+      {Key? key,
+      required this.shopsList,
+      required this.onSelectInventurStarten,
+      required this.kommentarController,
+      required this.onChangeValue})
+      : super(key: key);
+
+  @override
+  __BuildSheetProState createState() => __BuildSheetProState();
+}
+
+class __BuildSheetProState extends State<_BuildSheetPro> {
+  String? selectedVal;
+  @override
+  void initState() {
+    super.initState();
+    SchedulerBinding.instance?.addPostFrameCallback((_) {
+      setState(() {
+        selectedVal = widget.shopsList[0];
+      });
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -123,10 +147,10 @@ Widget buildSheet(
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: DropdownButton(
-                value: shopsList[0],
+                value: selectedVal,
                 isExpanded: true,
                 icon: const Icon(Icons.keyboard_arrow_down),
-                items: shopsList.map((singleShop) {
+                items: widget.shopsList.map((singleShop) {
                   return DropdownMenuItem<String>(
                     value: singleShop,
                     enabled: true,
@@ -134,7 +158,12 @@ Widget buildSheet(
                     child: Text(singleShop),
                   );
                 }).toList(),
-                onChanged: (String? newVal) => onChangeValue(newVal)),
+                onChanged: (String? newVal) {
+                  widget.onChangeValue(newVal);
+                  setState(() {
+                    selectedVal = newVal;
+                  });
+                }),
           ),
           const SizedBox(
             height: 15,
@@ -145,7 +174,7 @@ Widget buildSheet(
               title: "Kommentar",
               hintText: "comment",
               textInputType: TextInputType.text,
-              textEditingController: kommentarController,
+              textEditingController: widget.kommentarController,
               validator: (val) {},
             ),
           ),
@@ -155,7 +184,7 @@ Widget buildSheet(
           Center(
             child: TextButtonPro(
               title: 'INVENTUR STARTEN',
-              onPressed: () => onSelectInventurStarten(),
+              onPressed: () => widget.onSelectInventurStarten(),
             ),
           ),
           const SizedBox(
@@ -164,3 +193,5 @@ Widget buildSheet(
         ],
       ),
     );
+  }
+}

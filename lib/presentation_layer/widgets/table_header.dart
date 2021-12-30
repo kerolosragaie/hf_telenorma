@@ -17,7 +17,7 @@ class TableHeader extends StatelessWidget {
           top: BorderSide(width: 1.0, color: HexColor("E2E2E2")),
           bottom: BorderSide(width: 1.0, color: HexColor("E2E2E2")),
         ),
-        color: Colors.white,
+        color: HexColor("F7941D"),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

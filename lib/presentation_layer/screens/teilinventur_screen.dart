@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hf/business_logic_layer/cubit/shops_cubit.dart';
 import 'package:hf/business_logic_layer/cubit/teil_inventur_cubit.dart';
 import 'package:hf/constants/strings.dart';
+import 'package:hf/data_layer/models/shop.dart';
 import 'package:hf/data_layer/models/teil_inventur.dart';
 import 'package:hf/presentation_layer/widgets/widgets.dart';
 import 'package:logger/logger.dart';
@@ -21,6 +23,7 @@ class _TeilInventurScreenState extends State<TeilInventurScreen> {
 
   //For calling APIs:
   late List<TeilInventur> allTeilInventurs;
+  late List<Shop> allShops;
 
   void moveToAktiv() {
     formKey.currentState!.reset();
@@ -41,6 +44,7 @@ class _TeilInventurScreenState extends State<TeilInventurScreen> {
   void initState() {
     super.initState();
     SchedulerBinding.instance!.addPostFrameCallback((_) {
+      BlocProvider.of<ShopCubit>(context).getAllShops();
       BlocProvider.of<TeilInventurCubit>(context).getAllTeilInventur();
     });
   }
@@ -111,7 +115,7 @@ class _TeilInventurScreenState extends State<TeilInventurScreen> {
                 },
                 kommentarController: kommentarController,
                 onChangeValue: (val) {
-                  print(val);
+                  Logger().log(Level.info, val);
                 },
               );
             },
@@ -132,13 +136,26 @@ class _TeilInventurScreenState extends State<TeilInventurScreen> {
           child: ListView.builder(
             itemCount: allTeilInventurs.length,
             itemBuilder: (context, index) {
-              return _TeilInventurItem(
-                currentTeilInventur: allTeilInventurs[index],
-                onTap: () {
-                  /* Navigator.of(context).push(MaterialPageRoute(
+              return BlocBuilder<ShopCubit, ShopState>(
+                builder: (context, shopState) {
+                  if (shopState is ShopLoadedState) {
+                    allShops = (shopState).shopsList;
+                    return _TeilInventurItem(
+                      currentTeilInventur: allTeilInventurs[index],
+                      //TODO: how to compare two lists and return a single value
+                      currentShop: allShops[index],
+                      onTap: () {
+                        /* Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => TeilInventurViewerScreen(
                             currentShop: allShops[index],
                           ))); */
+                      },
+                    );
+                  } else {
+                    return const Center(
+                      child: Text("Loading..."),
+                    );
+                  }
                 },
               );
             },
@@ -163,13 +180,14 @@ class _TeilInventurScreenState extends State<TeilInventurScreen> {
 }
 
 //Single item of table:
-//TODO: add date,time to Shops model and use Hive SQL DB
 class _TeilInventurItem extends StatelessWidget {
   final TeilInventur currentTeilInventur;
+  final currentShop;
   final Function? onTap;
   const _TeilInventurItem({
     Key? key,
     required this.currentTeilInventur,
+    required this.currentShop,
     this.onTap,
   }) : super(key: key);
 
@@ -180,7 +198,7 @@ class _TeilInventurItem extends StatelessWidget {
       child: TableBody(
         data: [
           currentTeilInventur.id,
-          currentTeilInventur.shopId,
+          currentShop.title ?? "Null",
           currentTeilInventur.modified.toString(),
           "44"
         ],

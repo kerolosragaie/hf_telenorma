@@ -1,23 +1,23 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hf/data_layer/models/shops.dart';
-import 'package:hf/data_layer/repository/shops_repository.dart';
+import 'package:hf/data_layer/models/shop.dart';
+import 'package:hf/data_layer/repository/shop_repository.dart';
 import 'package:meta/meta.dart';
 
 part 'shops_state.dart';
 
-class ShopsCubit extends Cubit<ShopsState> {
-  final ShopsRepository shopsRepository;
-  List<Shops> shops = [];
-  ShopsCubit(this.shopsRepository) : super(ShopsInitialState());
+class ShopCubit extends Cubit<ShopState> {
+  final ShopRepository shopsRepository;
+  List<Shop> shopsList = [];
+  ShopCubit(this.shopsRepository) : super(ShopInitialState());
   //static ShopsCubit get(context) => BlocProvider.of(context);
 
-  List<Shops> getAllShops() {
+  List<Shop> getAllShops() {
     shopsRepository.getAllShops().then((shops) {
-      emit(ShopsLoadedState(shops));
-      this.shops = shops;
+      emit(ShopLoadedState(shops));
+      this.shopsList = shops;
     });
 
-    return shops;
+    return shopsList;
   }
 }

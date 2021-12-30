@@ -3,11 +3,11 @@ import 'package:flutter_hex_color/flutter_hex_color.dart';
 import 'package:hf/constants/strings.dart';
 import 'package:hf/data_layer/models/inventurs.dart';
 import 'package:hf/data_layer/models/products.dart';
-import 'package:hf/data_layer/models/shops.dart';
+import 'package:hf/data_layer/models/shop.dart';
 import 'package:hf/presentation_layer/widgets/widgets.dart';
 
 class TeilInventurViewerScreen extends StatefulWidget {
-  final Shops currentShop;
+  final Shop currentShop;
 
   const TeilInventurViewerScreen({Key? key, required this.currentShop})
       : super(key: key);
@@ -32,7 +32,7 @@ class _TeilInventurViewerScreenState extends State<TeilInventurViewerScreen> {
     return Scaffold(
       appBar: AppBarPro(
         addBackButton: true,
-        title: widget.currentShop.id,
+        title: widget.currentShop.title,
       ),
       body: Column(
         children: [

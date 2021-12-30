@@ -1,18 +1,17 @@
 part of 'shops_cubit.dart';
 
 @immutable
-abstract class ShopsState {}
+abstract class ShopState {}
 
-class ShopsInitialState extends ShopsState {}
+class ShopInitialState extends ShopState {}
 
-class ShopsLoadedState extends ShopsState {
-  final List<Shops> shops;
-
-  ShopsLoadedState(this.shops);
+class ShopLoadedState extends ShopState {
+  final List<Shop> shopsList;
+  ShopLoadedState(this.shopsList);
 }
 
-class ShopsErrorState extends ShopsState {
+class ShopErrorState extends ShopState {
   final String error;
 
-  ShopsErrorState(this.error);
+  ShopErrorState(this.error);
 }
