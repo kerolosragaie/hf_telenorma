@@ -4,27 +4,29 @@ import 'package:hf/constants/strings.dart';
 import 'package:hf/data_layer/models/inventurs.dart';
 import 'package:hf/data_layer/models/products.dart';
 import 'package:hf/data_layer/models/shop.dart';
+import 'package:hf/data_layer/models/teil_inventur.dart';
 import 'package:hf/presentation_layer/widgets/widgets.dart';
 
-class TeilInventurViewerScreen extends StatefulWidget {
-  final Shop currentShop;
+class TeilInventurArtikelScreen extends StatefulWidget {
+  final TeilInventur? currTeilInventur;
+  final Shop? currentShop;
 
-  const TeilInventurViewerScreen({Key? key, required this.currentShop})
+  const TeilInventurArtikelScreen(
+      {Key? key, this.currTeilInventur, this.currentShop})
       : super(key: key);
 
   @override
-  _TeilInventurViewerScreenState createState() =>
-      _TeilInventurViewerScreenState();
+  _TeilInventurArtikelScreenState createState() =>
+      _TeilInventurArtikelScreenState();
 }
 
-class _TeilInventurViewerScreenState extends State<TeilInventurViewerScreen> {
+class _TeilInventurArtikelScreenState extends State<TeilInventurArtikelScreen> {
 //For calling APIs:
   late List<Products> currentShopProducts;
 
   @override
   void initState() {
     super.initState();
-    //TODO:how to connect Shops with products API
   }
 
   @override
@@ -32,7 +34,7 @@ class _TeilInventurViewerScreenState extends State<TeilInventurViewerScreen> {
     return Scaffold(
       appBar: AppBarPro(
         addBackButton: true,
-        title: widget.currentShop.title,
+        title: widget.currTeilInventur!.id,
       ),
       body: Column(
         children: [
@@ -81,7 +83,7 @@ class _TeilInventurViewerScreenState extends State<TeilInventurViewerScreen> {
             child: ListView.builder(
               itemCount: 3,
               itemBuilder: (context, index) {
-                //Something wrong with model:
+                //TODO: !NEXT Something wrong with model:
                 return _TeilInventurViewerItem(
                   currentInventur: Inventurs(
                     id: "${index + 2}",

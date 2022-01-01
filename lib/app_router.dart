@@ -10,7 +10,7 @@ import 'package:hf/presentation_layer/screens/inventur_screen.dart';
 import 'package:hf/presentation_layer/screens/scanner_screen.dart';
 import 'package:hf/presentation_layer/screens/teilinventur_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hf/presentation_layer/screens/teilinventur_viewer_screen.dart';
+import 'package:hf/presentation_layer/screens/teilinventur_artikel_screen.dart';
 import 'constants/strings.dart';
 import 'presentation_layer/screens/pages.dart';
 
@@ -59,11 +59,8 @@ class AppRouter {
           ),
         );
       case teilInventurViewerScreen:
-        //TODO: pass value from TeilInventurScreen:
         return MaterialPageRoute(
-          builder: (_) => TeilInventurViewerScreen(
-            currentShop: Shop(),
-          ),
+          builder: (_) => TeilInventurArtikelScreen(),
         );
     }
   }

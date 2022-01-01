@@ -6,6 +6,7 @@ import 'package:hf/business_logic_layer/cubit/teil_inventur_cubit.dart';
 import 'package:hf/constants/strings.dart';
 import 'package:hf/data_layer/models/shop.dart';
 import 'package:hf/data_layer/models/teil_inventur.dart';
+import 'package:hf/presentation_layer/screens/teilinventur_artikel_screen.dart';
 import 'package:hf/presentation_layer/widgets/widgets.dart';
 import 'package:logger/logger.dart';
 
@@ -145,10 +146,13 @@ class _TeilInventurScreenState extends State<TeilInventurScreen> {
                       currentShop:
                           _getShopData(allTeilInventurs[index], allShops),
                       onTap: () {
-                        /* Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => TeilInventurViewerScreen(
-                            currentShop: allShops[index],
-                          ))); */
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => TeilInventurArtikelScreen(
+                            currTeilInventur: allTeilInventurs[index],
+                            currentShop:
+                                _getShopData(allTeilInventurs[index], allShops),
+                          ),
+                        ));
                       },
                     );
                   } else {
