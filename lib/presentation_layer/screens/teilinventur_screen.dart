@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hf/business_logic_layer/cubit/shops_cubit.dart';
+import 'package:hf/business_logic_layer/cubit/teil_inventur_artikel_cubit.dart';
 import 'package:hf/business_logic_layer/cubit/teil_inventur_cubit.dart';
 import 'package:hf/constants/strings.dart';
+import 'package:hf/data_layer/api/teil_inventur_artikel_services.dart';
 import 'package:hf/data_layer/models/shop.dart';
 import 'package:hf/data_layer/models/teil_inventur.dart';
+import 'package:hf/data_layer/repository/teil_inventur_artikel_repository.dart';
 import 'package:hf/presentation_layer/screens/teilinventur_artikel_screen.dart';
 import 'package:hf/presentation_layer/widgets/widgets.dart';
 import 'package:logger/logger.dart';
@@ -146,12 +149,24 @@ class _TeilInventurScreenState extends State<TeilInventurScreen> {
                       currentShop:
                           _getShopData(allTeilInventurs[index], allShops),
                       onTap: () {
+                        TeilInventurArtikelRepository
+                            teilInventurArtikelRepository =
+                            TeilInventurArtikelRepository(
+                                TeilInventurArtikelServices());
+
                         Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => TeilInventurArtikelScreen(
-                            currTeilInventur: allTeilInventurs[index],
-                            currentShop:
-                                _getShopData(allTeilInventurs[index], allShops),
-                          ),
+                          builder: (context) => MultiBlocProvider(
+                              providers: [
+                                BlocProvider<TeilInventurArtikelCubit>(
+                                  create: (context) => TeilInventurArtikelCubit(
+                                      teilInventurArtikelRepository),
+                                ),
+                              ],
+                              child: TeilInventurArtikelScreen(
+                                currTeilInventur: allTeilInventurs[index],
+                                currentShop: _getShopData(
+                                    allTeilInventurs[index], allShops),
+                              )),
                         ));
                       },
                     );

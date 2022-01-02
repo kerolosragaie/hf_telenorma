@@ -35,7 +35,7 @@ class TableBody extends StatelessWidget {
                       color: HexColor("424D51"),
                       fontSize: 13,
                       fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w400),
+                      fontWeight: FontWeight.w500),
                 ),
               ),
             ),

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hf/business_logic_layer/cubit/shops_cubit.dart';
+import 'package:hf/business_logic_layer/cubit/teil_inventur_artikel_cubit.dart';
 import 'package:hf/business_logic_layer/cubit/teil_inventur_cubit.dart';
 import 'package:hf/data_layer/api/shop_services.dart';
+import 'package:hf/data_layer/api/teil_inventur_artikel_services.dart';
 import 'package:hf/data_layer/api/teil_inventur_services.dart';
-import 'package:hf/data_layer/models/shop.dart';
 import 'package:hf/data_layer/repository/shop_repository.dart';
+import 'package:hf/data_layer/repository/teil_inventur_artikel_repository.dart';
 import 'package:hf/data_layer/repository/teil_inventur_repository.dart';
 import 'package:hf/presentation_layer/screens/inventur_screen.dart';
 import 'package:hf/presentation_layer/screens/scanner_screen.dart';
@@ -24,10 +26,8 @@ class AppRouter {
 
   AppRouter() {
     shopsRepository = ShopRepository(ShopServices());
-    shopsCubit = ShopCubit(shopsRepository);
 
     teilInventurRepository = TeilInventurRepository(TeilInventurServices());
-    teilInventurCubit = TeilInventurCubit(teilInventurRepository);
   }
 
   Route? generateRoute(RouteSettings settings) {
