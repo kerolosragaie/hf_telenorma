@@ -94,7 +94,7 @@ class _TeilInventurArtikelScreenState extends State<TeilInventurArtikelScreen> {
                 Expanded(
                   flex: 5,
                   child: allTeilInventurArtikelList.length <= 0
-                      ? Text("No data found!")
+                      ? Text("keine Daten")
                       : ListView.builder(
                           itemCount: allTeilInventurArtikelList.length,
                           itemBuilder: (context, index) {

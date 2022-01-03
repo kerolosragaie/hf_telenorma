@@ -10,7 +10,7 @@ class ShopCubit extends Cubit<ShopState> {
   final ShopRepository shopsRepository;
   List<Shop> shopsList = [];
   ShopCubit(this.shopsRepository) : super(ShopInitialState());
-  //static ShopsCubit get(context) => BlocProvider.of(context);
+  static ShopCubit get(context) => BlocProvider.of(context);
 
   List<Shop> getAllShops() {
     shopsRepository.getAllShops().then((shops) {

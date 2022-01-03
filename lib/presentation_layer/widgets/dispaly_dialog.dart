@@ -81,10 +81,10 @@ class _BuildSheetPro extends StatefulWidget {
   final Function onChangeValue;
   const _BuildSheetPro(
       {Key? key,
-      required this.shopsList,
-      required this.onSelectInventurStarten,
-      required this.kommentarController,
-      required this.onChangeValue})
+        required this.shopsList,
+        required this.onSelectInventurStarten,
+        required this.kommentarController,
+        required this.onChangeValue})
       : super(key: key);
 
   @override
