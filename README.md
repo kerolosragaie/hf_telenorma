@@ -6,7 +6,7 @@ HANDELSFAKTOR Telenorma Mobile App
 [![Linkedin: Ahmed Samir](https://img.shields.io/badge/-ahmedsamir-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/kerollos-ragaie-youssef-b9529aa6/)](https://www.linkedin.com/in/ahmed-samir-8a7988169/)
 
 <p align="center">
-    <img src="assets/hf_logo.svg" width="400" height="400">
+    <img src="assets/hf_logo.svg" width="400" height="100">
 </p>
 
 # ℹ️ Overview
