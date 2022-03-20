@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:hf/data_layer/api/service_manager.dart';
-import 'package:logger/logger.dart';
 
 class TeilInventurArtikelServices {
   ServiceManager serviceManager = ServiceManager();
