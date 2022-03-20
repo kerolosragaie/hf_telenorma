@@ -27,7 +27,7 @@ class TableBody extends StatelessWidget {
             width: 70,
             child: Center(
               child: Text(
-                data[index],
+                data[index].toString(),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: GoogleFonts.raleway(

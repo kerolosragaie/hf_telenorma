@@ -7,15 +7,36 @@ part 'teil_inventur_state.dart';
 
 class TeilInventurCubit extends Cubit<TeilInventurState> {
   final TeilInventurRepository teilInventurRepository;
-  List<TeilInventur> teilInventursList = [];
+  List<TeilInventur> allTeilInventursList = [];
+  List<TeilInventur> archivTeilInventursList = [];
 
   TeilInventurCubit(this.teilInventurRepository) : super(TeilInventurInitial());
 
   List<TeilInventur> getAllTeilInventur() {
     teilInventurRepository.getAllTeilInventur().then((teilInventurs) {
       emit(TeilInventurLoadedState(teilInventurs));
-      this.teilInventursList = teilInventurs;
+      this.allTeilInventursList = teilInventurs;
     });
-    return teilInventursList;
+    return allTeilInventursList;
+
   }
+  List<TeilInventur> getArchiveAllTeilInventur() {
+
+    teilInventurRepository.getArchivTeilInventur().then((teilInventurs) {
+      emit(ArchivTeilInventurLoadedState(teilInventurs));
+      this.archivTeilInventursList = teilInventurs;
+    });
+    return archivTeilInventursList;
+
+  }
+
+
+
+  Future addTeilInventur(Map<String,dynamic> data){
+    return teilInventurRepository.addTeilInventur(data).then((addTeilInventurResponse) {
+      emit(addTeilInventurState());
+      return addTeilInventurResponse;
+    });
+  }
+
 }

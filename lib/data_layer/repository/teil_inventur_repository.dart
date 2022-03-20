@@ -12,4 +12,17 @@ class TeilInventurRepository {
         .map((teilInventur) => TeilInventur.fromJson(teilInventur))
         .toList();
   }
+  Future<List<TeilInventur>> getArchivTeilInventur() async {
+    final archivTeilInventurList = await teilInventurServices.getArchivTeilInventur();
+    return archivTeilInventurList
+        .map((teilInventur) => TeilInventur.fromJson(teilInventur))
+        .toList();
+  }
+  Future addTeilInventur(Map<String,dynamic> data) async {
+
+    final response = await teilInventurServices.addTeilInventur(data);
+  return TeilInventur.fromJson(response);
+  }
+
+
 }

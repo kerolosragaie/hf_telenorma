@@ -19,6 +19,10 @@ const scannerScreen = '/scannerScreen';
 const inventurScreen = '/inventurScreen';
 const teilInventurScreen = '/teilInventurScreen';
 const teilInventurViewerScreen = '/teilInventurViewerScreen';
+const wareneingangScreen = '/wareneingang';
+const bestellungScreen = '/bestellung';
+const umlagerungScreen = '/umlagerung';
+const warenScreen = '/waren';
 
 //enum for form, to make change between forms
 enum FormType {

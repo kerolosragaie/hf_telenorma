@@ -1,5 +1,5 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hf/data_layer/models/kassen.dart';
 import 'package:hf/data_layer/models/shop.dart';
 import 'package:hf/data_layer/repository/shop_repository.dart';
 import 'package:meta/meta.dart';
@@ -10,7 +10,7 @@ class ShopCubit extends Cubit<ShopState> {
   final ShopRepository shopsRepository;
   List<Shop> shopsList = [];
   ShopCubit(this.shopsRepository) : super(ShopInitialState());
-  //static ShopsCubit get(context) => BlocProvider.of(context);
+  static ShopCubit get(context) => BlocProvider.of(context);
 
   List<Shop> getAllShops() {
     shopsRepository.getAllShops().then((shops) {

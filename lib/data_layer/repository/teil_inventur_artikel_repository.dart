@@ -12,9 +12,18 @@ class TeilInventurArtikelRepository {
         await teilInventurArtikelServices.getTeilInventurArtikels(
       inventurId: inventurId,
     );
+
     return teilInventurArtikelsList
         .map((teilInventurArtikel) =>
             TeilInventurArtikel.fromJson(teilInventurArtikel))
         .toList();
   }
+  Future updateTeilInventurStatus(id) async {
+    return await teilInventurArtikelServices.updateTeilInventurStatus(id);
+  }
+
+  Future addTeilInventurArtikel(Map<String,dynamic> data ) async{
+    return await teilInventurArtikelServices.addTeilInventurArtikel(data);
+  }
+
 }

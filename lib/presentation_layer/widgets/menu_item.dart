@@ -11,11 +11,11 @@ class MenuItem extends StatelessWidget {
   final bool addBackground;
   const MenuItem(
       {Key? key,
-      required this.imageLocation,
-      required this.text,
-      this.margin,
-      required this.onTap,
-      this.addBackground = false})
+        required this.imageLocation,
+        required this.text,
+        this.margin,
+        required this.onTap,
+        this.addBackground = false})
       : super(key: key);
 
   @override
@@ -32,8 +32,8 @@ class MenuItem extends StatelessWidget {
               children: [
                 addBackground
                     ? const Image(
-                        image: AssetImage("assets/icons/background_icon.png"),
-                      )
+                  image: AssetImage("assets/icons/background_icon.png"),
+                )
                     : const SizedBox.shrink(),
                 Image(
                   image: AssetImage(imageLocation),

@@ -22,4 +22,9 @@ class TeilInventurArtikelCubit extends Cubit<TeilInventurArtikelState> {
     });
     return teilInventurArtikels;
   }
+  Future updateTeilInventurStatus(id){
+    return teilInventurArtikelRepository.updateTeilInventurStatus(id).then((value) {
+      emit(UpdateTeilInventurState());
+    });
+  }
 }

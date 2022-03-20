@@ -22,7 +22,7 @@ class _ToggleButtonProState extends State<ToggleButtonPro> {
         isSelected: isSelected,
         selectedColor: AppColors.orange,
         hoverColor: AppColors.orange,
-        color: HexColor('#F2F3F2'),
+        color: HexColor('#919191'),
         splashColor: AppColors.orange,
         fillColor: Colors.white,
         borderRadius: BorderRadius.circular(6),

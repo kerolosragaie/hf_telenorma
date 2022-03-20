@@ -34,23 +34,32 @@ class _StartScreenState extends State<StartScreen> {
         imageLocation: "assets/icons/wareneingang_icon.png",
         text: "Wareneingang",
         addBackground: true,
-        onTap: () {},
+        onTap: () {
+          Navigator.of(context).pushNamed(wareneingangScreen);
+        },
       ),
       MenuItem(
         imageLocation: "assets/icons/bestellung_icon.png",
         text: "Bestellung",
         addBackground: true,
-        onTap: () {},
+        onTap: () {
+          Navigator.of(context).pushNamed(bestellungScreen);
+        },
       ),
       MenuItem(
         imageLocation: "assets/icons/shop2shop_icon.png",
         text: "Umlagerung",
-        onTap: () {},
+        onTap: () {
+          Navigator.of(context).pushNamed(umlagerungScreen);
+        },
       ),
       MenuItem(
         imageLocation: "assets/icons/artikel_icon.png",
         text: "Waren",
-        onTap: () {},
+        onTap: () {
+          Navigator.of(context).pushNamed(warenScreen);
+
+        },
       ),
     ];
     return Scaffold(

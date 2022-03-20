@@ -9,8 +9,13 @@ class TeilInventurLoadedState extends TeilInventurState {
   final List<TeilInventur> teilInventurs;
   TeilInventurLoadedState(this.teilInventurs);
 }
+class ArchivTeilInventurLoadedState extends TeilInventurState {
+  final List<TeilInventur> teilInventurs;
+  ArchivTeilInventurLoadedState(this.teilInventurs);
+}
 
 class TeilInventurErrorState extends TeilInventurState {
   final String error;
   TeilInventurErrorState(this.error);
 }
+class addTeilInventurState extends TeilInventurState{}

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_hex_color/flutter_hex_color.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hf/data_layer/models/shop.dart';
 import 'textbutton_pro.dart';
 import 'textformfield_pro.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -9,7 +10,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 showNeueInventur({
   required BuildContext context,
   String? toastMessgeNein,
-  required List<String> shopsList,
+  required List<Shop> shopsList,
   required Function onSelectInventurStarten,
   required TextEditingController kommentarController,
   required Function onChangeValue,
@@ -51,6 +52,7 @@ showNeueInventur({
           kommentarController: kommentarController,
           onChangeValue: onChangeValue,
         ),
+
       );
     },
   );
@@ -75,16 +77,16 @@ showNeueInventur({
 }
 
 class _BuildSheetPro extends StatefulWidget {
-  final List<String> shopsList;
+  final List<Shop> shopsList;
   final Function onSelectInventurStarten;
   final TextEditingController kommentarController;
   final Function onChangeValue;
   const _BuildSheetPro(
       {Key? key,
-      required this.shopsList,
-      required this.onSelectInventurStarten,
-      required this.kommentarController,
-      required this.onChangeValue})
+        required this.shopsList,
+        required this.onSelectInventurStarten,
+        required this.kommentarController,
+        required this.onChangeValue})
       : super(key: key);
 
   @override
@@ -92,13 +94,15 @@ class _BuildSheetPro extends StatefulWidget {
 }
 
 class __BuildSheetProState extends State<_BuildSheetPro> {
-  String? selectedVal;
+  Shop? selectedVal;
+
   @override
   void initState() {
     super.initState();
     SchedulerBinding.instance?.addPostFrameCallback((_) {
       setState(() {
         selectedVal = widget.shopsList[0];
+
       });
     });
   }
@@ -151,14 +155,14 @@ class __BuildSheetProState extends State<_BuildSheetPro> {
                 isExpanded: true,
                 icon: const Icon(Icons.keyboard_arrow_down),
                 items: widget.shopsList.map((singleShop) {
-                  return DropdownMenuItem<String>(
+                  return DropdownMenuItem<Shop>(
                     value: singleShop,
                     enabled: true,
                     alignment: AlignmentDirectional.centerStart,
-                    child: Text(singleShop),
+                    child: Text(singleShop.title.toString()),
                   );
                 }).toList(),
-                onChanged: (String? newVal) {
+                onChanged: (Shop? newVal) {
                   widget.onChangeValue(newVal);
                   setState(() {
                     selectedVal = newVal;

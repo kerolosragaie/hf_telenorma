@@ -14,3 +14,4 @@ class TeilInventurArtikelErrorState extends TeilInventurArtikelState {
   final String error;
   TeilInventurArtikelErrorState(this.error);
 }
+class UpdateTeilInventurState extends TeilInventurArtikelState{}

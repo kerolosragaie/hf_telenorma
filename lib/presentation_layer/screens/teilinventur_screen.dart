@@ -4,14 +4,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hf/business_logic_layer/cubit/shops_cubit.dart';
 import 'package:hf/business_logic_layer/cubit/teil_inventur_artikel_cubit.dart';
 import 'package:hf/business_logic_layer/cubit/teil_inventur_cubit.dart';
+import 'package:hf/business_logic_layer/cubit/ware_cubit.dart';
 import 'package:hf/constants/strings.dart';
 import 'package:hf/data_layer/api/teil_inventur_artikel_services.dart';
+import 'package:hf/data_layer/api/ware.dart';
 import 'package:hf/data_layer/models/shop.dart';
 import 'package:hf/data_layer/models/teil_inventur.dart';
 import 'package:hf/data_layer/repository/teil_inventur_artikel_repository.dart';
+import 'package:hf/data_layer/repository/ware_repository.dart';
+import 'package:hf/presentation_layer/screens/scanner_screen.dart';
 import 'package:hf/presentation_layer/screens/teilinventur_artikel_screen.dart';
 import 'package:hf/presentation_layer/widgets/widgets.dart';
-import 'package:logger/logger.dart';
 
 class TeilInventurScreen extends StatefulWidget {
   const TeilInventurScreen({Key? key}) : super(key: key);
@@ -27,6 +30,7 @@ class _TeilInventurScreenState extends State<TeilInventurScreen> {
 
   //For calling APIs:
   late List<TeilInventur> allTeilInventurs;
+  late List<TeilInventur> archivTeilInventurs;
   late List<Shop> allShops;
 
   void moveToAktiv() {
@@ -50,7 +54,9 @@ class _TeilInventurScreenState extends State<TeilInventurScreen> {
     SchedulerBinding.instance!.addPostFrameCallback((_) {
       BlocProvider.of<ShopCubit>(context).getAllShops();
       BlocProvider.of<TeilInventurCubit>(context).getAllTeilInventur();
+      BlocProvider.of<TeilInventurCubit>(context).getArchiveAllTeilInventur();
     });
+
   }
 
   @override
@@ -62,9 +68,10 @@ class _TeilInventurScreenState extends State<TeilInventurScreen> {
       ),
       body: BlocBuilder<TeilInventurCubit, TeilInventurState>(
           builder: (context, teilInventurState) {
-        if (teilInventurState is TeilInventurLoadedState) {
-          allTeilInventurs = (teilInventurState).teilInventurs;
-          return Form(
+            allTeilInventurs = BlocProvider.of<TeilInventurCubit>(context).allTeilInventursList;;
+            archivTeilInventurs = BlocProvider.of<TeilInventurCubit>(context).archivTeilInventursList;
+            if (allTeilInventurs.isNotEmpty) {
+              return Form(
             key: formKey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -86,6 +93,7 @@ class _TeilInventurScreenState extends State<TeilInventurScreen> {
               ],
             ),
           );
+
         } else {
           return const Center(
             child: Text("Loading..."),
@@ -103,23 +111,35 @@ class _TeilInventurScreenState extends State<TeilInventurScreen> {
           child: TextButtonPro(
             title: "Neue Teil-Inventur",
             onPressed: () {
+
               TextEditingController kommentarController =
                   TextEditingController();
+              Shop currentDropDownValue = allShops[0];
               showNeueInventur(
                 context: context,
-                toastMessgeNein: "Hello",
-                shopsList: [
-                  "ID",
-                  "Shop",
-                  "Erstel Datum",
-                  "Benutzer",
-                ],
+                toastMessgeNein: "Sie müssen zuerst die Bestände im Kassensystem auf Null setzen",
+                shopsList: allShops,
                 onSelectInventurStarten: () {
-                  print("worked");
+                  Map<String,dynamic> data = {
+                    'shop_id':currentDropDownValue.id,
+                    'bemerkung' : kommentarController.text,
+                    'kasse_id' : currentDropDownValue.kasseId
+                  };
+                   BlocProvider.of<TeilInventurCubit>(context).addTeilInventur(data).then((value){
+
+                    WareRepository wareRepository = WareRepository(WareServices());
+                     Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                         BlocProvider(create: (context)=>WareCubit(wareRepository)
+                       ,child:  ScannerScreen(currItem: value,type: 'teil-inventur',),))).then((value) {
+                       BlocProvider.of<TeilInventurCubit>(context).getAllTeilInventur();
+                     });
+                   });
                 },
                 kommentarController: kommentarController,
                 onChangeValue: (val) {
-                  Logger().log(Level.info, val);
+                  setState(() {
+                    currentDropDownValue = val;
+                  });
                 },
               );
             },
@@ -144,10 +164,10 @@ class _TeilInventurScreenState extends State<TeilInventurScreen> {
                 builder: (context, shopState) {
                   if (shopState is ShopLoadedState) {
                     allShops = (shopState).shopsList;
+
                     return _TeilInventurItem(
                       currentTeilInventur: allTeilInventurs[index],
-                      currentShop:
-                          _getShopData(allTeilInventurs[index], allShops),
+                      currentShop: _getShopData(allTeilInventurs[index], allShops),
                       onTap: () {
                         TeilInventurArtikelRepository
                             teilInventurArtikelRepository =
@@ -164,10 +184,14 @@ class _TeilInventurScreenState extends State<TeilInventurScreen> {
                               ],
                               child: TeilInventurArtikelScreen(
                                 currTeilInventur: allTeilInventurs[index],
-                                currentShop: _getShopData(
-                                    allTeilInventurs[index], allShops),
+                                // currentShop: _getShopData(
+                                //     allTeilInventurs[index], allShops),
                               )),
-                        ));
+                        )).then((value) {
+                          BlocProvider.of<ShopCubit>(context).getAllShops();
+                          BlocProvider.of<TeilInventurCubit>(context).getAllTeilInventur();
+                          BlocProvider.of<TeilInventurCubit>(context).getArchiveAllTeilInventur();
+                        });
                       },
                     );
                   } else {
@@ -192,6 +216,51 @@ class _TeilInventurScreenState extends State<TeilInventurScreen> {
             "Benutzer",
           ],
         ),
+        //Table body:
+        SizedBox(
+          height: MediaQuery.of(context).size.height / 1.7,
+          child: ListView.builder(
+            itemCount: archivTeilInventurs.length,
+            itemBuilder: (context, index) {
+              return BlocBuilder<ShopCubit, ShopState>(
+                builder: (context, shopState) {
+                  print('archivTeilInvedanturs $archivTeilInventurs');
+                  if (archivTeilInventurs.isNotEmpty) {
+                    return _TeilInventurItem(
+                      currentTeilInventur: archivTeilInventurs[index],
+                      currentShop: _getShopData(archivTeilInventurs[index], allShops),
+                      onTap: () {
+                        TeilInventurArtikelRepository
+                        teilInventurArtikelRepository =
+                        TeilInventurArtikelRepository(
+                            TeilInventurArtikelServices());
+
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => MultiBlocProvider(
+                              providers: [
+                                BlocProvider<TeilInventurArtikelCubit>(
+                                  create: (context) => TeilInventurArtikelCubit(
+                                      teilInventurArtikelRepository),
+                                ),
+                              ],
+                              child: TeilInventurArtikelScreen(
+                                currTeilInventur: archivTeilInventurs[index],
+                                // currentShop: _getShopData(
+                                //     archivTeilInventurs[index], allShops),
+                              )),
+                        ));
+                      },
+                    );
+                  } else {
+                    return const Center(
+                      child: Text("Loading..."),
+                    );
+                  }
+                },
+              );
+            },
+          ),
+        ),
         //TODO: what to add here?
       ];
     }
@@ -199,12 +268,10 @@ class _TeilInventurScreenState extends State<TeilInventurScreen> {
 
   //? This function to get shop data of single teil inventur:
   Shop _getShopData(TeilInventur _currTeilInventur, List<Shop> _allShops) {
-    for (int i = 0; i < _allShops.length; i++) {
-      if (_currTeilInventur.kasseId == _allShops[i].kasseId) {
-        return _allShops[i];
-      }
-    }
-    return Shop();
+
+    return _allShops.firstWhere((element) => element.id == _currTeilInventur.shopId.toString()
+        && element.kasseId == _currTeilInventur.kasseId.toString());
+
   }
 }
 
@@ -228,7 +295,7 @@ class _TeilInventurItem extends StatelessWidget {
         data: [
           currentTeilInventur.id,
           currentShop.title ?? "Null",
-          currentTeilInventur.modified.toString(),
+          currentTeilInventur.created.toString(), // modified To created
           "44"
         ],
       ),

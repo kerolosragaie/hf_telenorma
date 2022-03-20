@@ -3,18 +3,19 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hex_color/flutter_hex_color.dart';
 import 'package:hf/business_logic_layer/cubit/teil_inventur_artikel_cubit.dart';
-import 'package:hf/constants/strings.dart';
-import 'package:hf/data_layer/models/shop.dart';
+import 'package:hf/business_logic_layer/cubit/ware_cubit.dart';
+import 'package:hf/data_layer/api/ware.dart';
 import 'package:hf/data_layer/models/teil_inventur.dart';
 import 'package:hf/data_layer/models/teil_inventur_artikel.dart';
+import 'package:hf/data_layer/repository/ware_repository.dart';
+import 'package:hf/presentation_layer/screens/scanner_screen.dart';
 import 'package:hf/presentation_layer/widgets/widgets.dart';
 
 class TeilInventurArtikelScreen extends StatefulWidget {
   final TeilInventur? currTeilInventur;
-  final Shop? currentShop;
 
   const TeilInventurArtikelScreen(
-      {Key? key, this.currTeilInventur, this.currentShop})
+      {Key? key, this.currTeilInventur})
       : super(key: key);
 
   @override
@@ -46,90 +47,113 @@ class _TeilInventurArtikelScreenState extends State<TeilInventurArtikelScreen> {
       ),
       body: BlocBuilder<TeilInventurArtikelCubit, TeilInventurArtikelState>(
         builder: (context, teilInventurArtikelState) {
-          if (teilInventurArtikelState is TeilInventurArtikelLoadedState) {
-            allTeilInventurArtikelList =
-                (teilInventurArtikelState).teilInventurArtikels;
-            return Column(
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(bottom: 21),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      SizedBox(
-                        height: 43,
-                        width: 150,
-                        child: TextButtonPro(
-                          title: "SPEICHERN",
-                          onPressed: () {},
+
+            if (teilInventurArtikelState is TeilInventurArtikelLoadedState) {
+              allTeilInventurArtikelList =
+                  (teilInventurArtikelState).teilInventurArtikels;
+
+              double totalMenge  = 0;
+              double totalVK = 0;
+
+              allTeilInventurArtikelList.forEach((element) {
+                totalMenge = totalMenge + double.parse(element.menge.toString());
+                totalVK = totalVK + double.parse(element.vk.toString());
+              });
+
+              return Column(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 21),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        SizedBox(
+                          height: 43,
+                          width: 150,
+                          child: TextButtonPro(
+                            title: "SPEICHERN",
+                            onPressed: () {},
+                          ),
                         ),
-                      ),
-                      Column(
-                        children: const [
-                          Text("Menge: 0"),
-                          Text("VK: 0 E"),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 43,
-                        width: 150,
-                        child: TextButtonPro(
-                          title: "HF IMPORT",
-                          onPressed: () {},
+                        Column(
+                          children:  [
+                            Text("Menge: $totalMenge"),
+                            Text("VK: $totalVK E"),
+                          ],
                         ),
-                      ),
+                        SizedBox(
+                          height: 43,
+                          width: 150,
+                          child: TextButtonPro(
+                            title: "HF IMPORT",
+                            onPressed: () {
+                              BlocProvider.of<TeilInventurArtikelCubit>(context)
+                                  .updateTeilInventurStatus(
+                                  widget.currTeilInventur?.id)
+                                  .then((value) {
+                                Navigator.pop(context, true);
+                              });
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  //Table header here:
+                  const TableHeader(
+                    titles: [
+                      "Artikel",
+                      "EAN",
+                      "VK",
+                      "Menge",
+                      "HF"
                     ],
                   ),
-                ),
-                //Table header here:
-                const TableHeader(
-                  titles: [
-                    "Artikel",
-                    "EAN",
-                    "VK",
-                    "Menge Kasse",
-                    "Menge",
-                  ],
-                ),
-                Expanded(
-                  flex: 5,
-                  child: allTeilInventurArtikelList.length <= 0
-                      ? Text("No data found!")
-                      : ListView.builder(
-                          itemCount: allTeilInventurArtikelList.length,
-                          itemBuilder: (context, index) {
-                            return _TeilInventurViewerItem(
-                              currentTeilInventurArtikel:
-                                  allTeilInventurArtikelList[index],
-                            );
-                          },
-                        ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).pushNamed(scannerScreen);
-                    },
-                    child: Container(
-                      color: HexColor("F89720"),
-                      child: const Center(
-                        child: Image(
-                          height: 65,
-                          width: 65,
-                          image: AssetImage("assets/icons/scan_button.png"),
+                  Expanded(
+                    flex: 5,
+                    child: allTeilInventurArtikelList.length <= 0
+                        ? Text("keine Daten")
+                        : ListView.builder(
+                      itemCount: allTeilInventurArtikelList.length,
+                      itemBuilder: (context, index) {
+                        return _TeilInventurViewerItem(
+                          currentTeilInventurArtikel:
+                          allTeilInventurArtikelList[index],
+                        );
+                      },
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: GestureDetector(
+                      onTap: () {
+WareRepository wareRepository = WareRepository(WareServices());
+
+                        Navigator.push(context, MaterialPageRoute(builder:
+                            (context)=>BlocProvider(create: (context)=>
+                                WareCubit(wareRepository),child: ScannerScreen(
+                              currItem:
+                            widget.currTeilInventur,type: "teil-invenur",)),));
+                      },
+                      child: Container(
+                        color: HexColor("F89720"),
+                        child: const Center(
+                          child: Image(
+                            height: 65,
+                            width: 65,
+                            image: AssetImage("assets/icons/scan_button.png"),
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            );
-          } else {
-            return const Center(
-              child: Text("Loading..."),
-            );
-          }
+                ],
+              );
+            } else {
+              return const Center(
+                child: Text("Loading..."),
+              );
+            }
         },
       ),
     );
@@ -154,8 +178,8 @@ class _TeilInventurViewerItem extends StatelessWidget {
           currentTeilInventurArtikel.artikel.toString(),
           currentTeilInventurArtikel.ean.toString(),
           currentTeilInventurArtikel.vk.toString(),
-          currentTeilInventurArtikel.kasse.toString(),
           currentTeilInventurArtikel.menge.toString(),
+          '0'
         ],
       ),
     );
