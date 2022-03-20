@@ -10,9 +10,10 @@ HANDELSFAKTOR Telenorma Mobile App
 </p>
 
 # ℹ️ Overview
-- An android native app developed, to be a great documentation for any beginners
-- Retrofit
-- NodeJS
+- An Flutter app developed, to be a great documentation for any beginners
+- Flutter
+- BloC pattern
+- PHP BackEnd
 
 # :iphone: Screens
 1-The app can handle any server error:
