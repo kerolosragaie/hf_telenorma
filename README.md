@@ -10,9 +10,7 @@ HANDELSFAKTOR Telenorma Mobile App
 </p>
 
 # ℹ️ Overview
-Application for taking inventory, The main product of the company is cash register software (for example, imagine cash registers in a supermarket). Each store where our cash register equipment is located has its own warehouse, which is subject to periodic inventory.
-The cash system has a ready-made API through which all information about the goods in the warehouse (EAN, name, price, actual quantity in the cash system), stores and cash desks will be transferred to the application.
-One cash system, one domain can contain several stores, for example, the X company has 100 stores in different cities, they will have one cash system with 100 stores.
+Application for taking inventory, The main product of the company is cash register software (for example, imagine cash registers in a supermarket). Each store where cash register equipment is located has its own warehouse, which is subject to periodic inventory. The cash system has a ready-made API through which all information about the goods in the warehouse (EAN, name, price, actual quantity in the cash system), stores and cash desks will be transferred to the application. One cash system, one domain can contain several stores, for example, the X company has 100 stores in different cities, they will have one cash system with 100 stores.
 
 # :iphone: Screens
 1-
